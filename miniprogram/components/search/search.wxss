@@ -2,12 +2,12 @@
 
 /* 搜索框 */
 .search-view{
-  position:fixed;
   left:0;
   right:0;
   top:0;
   z-index:500;
   width: 100%;
+  position: relative;
   height: 100rpx;
   background: rgba(128, 128, 128, 0);
   display: flex;
@@ -24,27 +24,39 @@
    padding-bottom: auto;
    margin: auto;
    height: 70rpx;
-   border-radius:5px 5px;
+   border-radius:8px 8px;
+   border-width: 4rpx 4rpx 4rpx 4rpx;
+  border-color: black;
+  border-style: solid;
 }
 .search-icon{
   width: 40rpx;
-  height: 40rpx;
+  height: 33rpx;
   margin-right: 20rpx;
 }
 .search-input{
   width: 500rpx;
-  font-size: 28rpx;
+  font-size: 29rpx;
+  letter-spacing: 3rpx;
 }
+
+.close-icon{
+  width: 60rpx;
+  height: 50rpx;
+  margin-right: 10rpx;
+}
+
 .search-btn{
   width: 150rpx;
   height: 70rpx;
   margin-right: 0rpx;
-  background-color:rgb(248, 71, 115);
+  background-color:rgb(0, 0, 0);
   font-size: 28rpx;
   align-items: center;
   border-top-left-radius: 0rpx;
   border-bottom-left-radius: 0rpx;
   color:#fff;
   border:none;
+  letter-spacing: 5rpx;
   position: relative;
 }

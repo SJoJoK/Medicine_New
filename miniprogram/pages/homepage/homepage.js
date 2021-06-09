@@ -9,14 +9,30 @@ Page({
     imgSwiperUrl: '',
     medicineInfo: [],
     typeCat: [
-      { id: 0, name: "全部展示" },
-      { id: 1, name: "子分类0" },
-      { id: 2, name: "子分类1" },
-      { id: 3, name: "子分类2" },
+      { id: 0, name: "全部药品" },
+      { id: 1, name: "生活用药" },
+      { id: 2, name: "感冒发烧" },
+      { id: 3, name: "抗菌消炎" },
+      { id: 4, name: "跌打损伤" },
+      { id: 5, name: "呼吸系统" },
+      { id: 6, name: "心脑血管" },
+      { id: 7, name: "安神助眠" },
+      { id: 8, name: "滋补养生" },
+      { id: 9, name: "胃肠道" },
+      { id: 10, name: "眼科" },
+      { id: 11, name: "皮肤" },
+      { id: 12, name: "其他" }
     ],
     activeTypeId: 0,
+    orderCat: [
+      { id: 0, name: "默认" },
+      { id: 1, name: "销量" },
+      { id: 2, name: "价格" }
+    ],
+    activeOrderId: 0,
     isShow:true, 
-    openid: '',   
+    openid: '',
+    rules:{},
     offLine:null  //是否维护
   },
 
@@ -55,50 +71,49 @@ Page({
   // ------------分类展示切换---------
   typeSwitch: function(e) {
     getCurrentPages()["0"].setData({
-      activeTypeId: parseInt(e.currentTarget.id)
+      activeTypeId: parseInt(e.currentTarget.id),
+      rules: e.currentTarget.id == 0 ? {} : { class: e.currentTarget.id}
     })
-    switch (e.currentTarget.id) {
-      // 全部展示
-      case '0':
-        app.getInfoByOrder('medicine_stock', 'price', 'desc',
+    this.showMedicine();
+  },
+
+  orderSwitch: function (e) {
+    getCurrentPages()["0"].setData({
+      activeOrderId: parseInt(e.currentTarget.id)
+    })
+
+  this.showMedicine();
+  },
+
+  showMedicine: function()
+  {
+      if (this.data.activeOrderId == '0') {
+        app.getInfo('medicine_stock', this.data.rules, 'id', 'asc',
           e => {
             getCurrentPages()["0"].setData({
               medicineInfo: e.data
             })
-          }
+          },
         )
-        break;
-      // 子分类1
-      case '1':
-        app.getInfoWhere('medicine_stock', {myClass:'1'},
+      }
+      else if (this.data.activeOrderId == '1') {
+        app.getInfo('medicine_stock', this.data.rules, 'sales', 'desc',
           e => {
             getCurrentPages()["0"].setData({
               medicineInfo: e.data
             })
-          }
+          },
         )
-        break;
-      // 子分类2
-      case '2':
-        app.getInfoByOrder('medicine_stock',{myClass:'2'},
+      }
+      else if (this.data.activeOrderId == '2') {
+        app.getInfo('medicine_stock', this.data.rules, 'price', 'asc',
           e => {
             getCurrentPages()["0"].setData({
               medicineInfo: e.data
             })
-          }
+          },
         )
-        break;
-      // 子分类3
-      case '3':
-        app.getInfoWhere('medicine_stock', {myClass:'3'},
-          e => {
-            getCurrentPages()["0"].setData({
-              medicineInfo: e.data
-            })
-          }
-        )
-        break;
-    }
+      }
   },
 
 
@@ -131,15 +146,17 @@ Page({
   onShow: function () {
     var that = this
     // 药品信息
-    app.getInfoByOrder('medicine_stock', 'price', 'desc',
+    app.getInfoByOrder('medicine_stock', 'id', 'asc',
       e => {
         console.log(e.data)
         getCurrentPages()["0"].setData({
           medicineInfo: e.data,
-          isShow: true
+          isShow: true,
+          activeTypeId: 0,
+          activeOrderId: 0
         })
         wx.hideLoading()
-      }
+      },
     )
     // console.log(app.globalData.offLine)
     // 是否下线

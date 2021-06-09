@@ -1,38 +1,145 @@
-page {background-color: rgb(245, 249, 253)}
+page {background-color: rgb(255,255,255)}
 
 /* 轮播图 */
-.swiperContainer {width: 750prx;height: 500rpx;}
+
+
+.swiperContainer {
+  width: 750prx;
+  height: 500rpx;
+  }
 .fruit-board {margin-top: 10rpx}
 
-
 /* 分类选项卡 */
-.type-container {display: flex;justify-content: start;padding: 5rpx 20rpx 0 20rpx;position: relative;top: -93rpx;background: rgba(0, 0, 0, 0.137);margin-top: 15rpx;}
-.type-container .type-item{width: 25%;height: 60rpx;}
-.type-container .type-item view{font-size: 25rpx;text-align: center;line-height: 60rpx;border-radius: 10rpx 10rpx 0 0;margin: 0 3rpx;}
-.type-contain.type-container .type-item{width: 150rpx;height: 60rpx;}
-.type-container .type-item view{font-size: 25rpx;text-align: center;line-height: 60rpx;
-background-color: rgb(253, 173, 193);color: rgb(255, 255, 255)}
-.type-container .type-item .type-item-on {background-color: rgb(248, 71, 115);color: white;box-shadow: 3rpx grey}
+.type-container {
+  width: 100%;
+  height: 100rpx;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+}
 
-/* 补偿条 */
-.extra {height: 78rpx;background-color: rgb(245, 249, 253);width: 750rpx;position: relative;top: -93rpx;border-radius: 15rpx 15rpx 0 0;}
+.type-item{
+  height: 100rpx;
+  margin: 23rpx;
+  padding-left: 10rpx;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.type-item view{
+  line-height: 60rpx;
+  font-size: 33rpx;
+  text-align: center;
+  letter-spacing: 2rpx;
+  color: rgb(0, 0, 0);
+}
+
+.type-item-on {
+  border-bottom: 5rpx solid rgb(0, 0, 0);
+}
+
+/* 排序 */
+.order-container {
+  position: relative;
+  display: flex;
+  white-space: nowrap;
+}
+
+.order-item{
+  height: 30rpx;
+  width:80rpx;
+  margin-left: 14rpx;
+  margin-bottom: 20rpx;
+  margin-top: 10rpx;
+  padding-left: 10rpx;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.order-item view{
+  line-height: 40rpx;
+  font-size: 22rpx;
+  text-align: center;
+  letter-spacing: 2rpx;
+}
+
+.order-item-on {
+  color: rgb(219, 168, 113);
+}
 
 /* 商品图 */
-.fruit-container {display: flex;flex-direction: row;flex-wrap: wrap;justify-content: space-between;
-width: 710rpx;margin: 20rpx;border-radius: 10rpx 10rpx 0 0;position: relative;top: -173rpx;}
-.fruit-item {width: 345rpx;overflow: hidden;border-radius: 15rpx;margin-bottom: 20rpx;background-color: white;box-shadow: 3.5rpx 3.5rpx 1rpx #d3d1d1;}
-.fruit-item .fruit-image {height: 320rpx;width: 345rpx;border:1rpx;}
-.fruit-item .fruit-image image {height: 100%;width: 100%}
-.fruit-item .fruit-info {margin: 15rpx 0 10rpx 10rpx;}
-.fruit-item .fruit-info .name {display:block;font-size:35rpx;}
-.fruit-item .fruit-info .line2 {display: flex;margin-top: 10rpx;justify-content: space-between;padding-right: 20rpx;align-items: center}
-.fruit-item .fruit-info .line2 image {width: 80rpx;height: 70rpx;position: relative;top: -8rpx;left: 12rpx}
-.fruit-item .fruit-info .price {width: 200rpx;font-size:35rpx;color:#EE6A50}
-.fruit-item .fruit-info .price .unit {font-size:20rpx;}
-.fruit-item .fruit-info image {width: 50rpx;height: 50rpx;}
+.medicine-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  background-color: rgb(247, 246, 246);
+}
+
+.medicine-item {
+  width: 345rpx;
+  border-radius: 15rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  margin-left:14rpx;
+  margin-right:14rpx;
+  background-color: white;
+}
+
+.medicine-item .medicine-image {
+  height: 320rpx;
+  width: 345rpx;
+}
+
+.medicine-item .medicine-image image {
+  height: 100%;
+  width: 100%;
+  border-top-left-radius: 15rpx;
+  border-top-right-radius: 15rpx;
+}
+
+.medicine-item .medicine-info {
+  margin: 15rpx 0 10rpx 10rpx;
+}
+
+.medicine-item .medicine-info .name {
+  display:block;
+  font-size:30rpx;
+  margin-left: 6rpx;
+}
+
+.medicine-item .medicine-info .line2 {
+  display: flex;
+  margin-top: 5rpx;
+  justify-content: space-between;
+  padding-right: 20rpx;
+  align-items: center
+}
+
+.medicine-item .medicine-info .line2 image {
+  width: 50rpx;
+  height: 50rpx;
+  position: relative;
+  top: -8rpx;
+  left: 12rpx
+}
+
+.medicine-item .medicine-info .price {
+  width: 200rpx;
+  font-size:30rpx;color:rgb(219, 168, 113);
+}
+
+.medicine-item .medicine-info .price .unit {
+  font-size:20rpx;
+  color:rgb(171, 171, 171);
+}
 
 /* 主页底部 */
-.homeBottom {padding-bottom: 25rpx;display: flex;justify-content: center;align-items: center}
-.homeBottom .bottomLine {height: 1rpx;width: 50rpx;background: rgb(202, 201, 201);margin: 0 15rpx}
+.homeBottom {padding-top:15rpx;padding-bottom: 25rpx;display: flex;justify-content: center;align-items: center}
 .homeBottom .bottomWord {font-size: 25rpx;color: rgb(202, 201, 201)}
 

@@ -28,27 +28,62 @@ Component({
       })
     },
 
+    btnCancel() {
+      this.setData({
+        inputValue: ""
+      })
+    },
+
     // 点击查找按钮
     toSearch: function(e){
+      const db = wx.cloud.database()
+      const _ = db.command
       const myWord = getCurrentPages()["0"].data.searchWord
+
       console.log(myWord)
-      app.getInfoWhere('medicine_stock', { name : myWord },
-        e => {
-          if (e.data.length <= 0){
-            wx.showToast({
-              title: '没有喔~',
+
+    if(myWord == "" || myWord == undefined)
+    return;
+      else{
+      getCurrentPages()["0"].setData({
+        rules: _.or([
+          {
+            name: db.RegExp({
+              regexp: myWord,
+              options: 'i'
             })
-          }
-          else{
+          },
+          {
+            symptom: db.RegExp({
+              regexp: myWord,
+              options: 'i'
+            })
+          }])
+      })
+
+      app.getInfoWhere('medicine_stock', _.or([
+        {
+          name: db.RegExp({
+            regexp:myWord,
+            options:'i'})
+        },
+        {
+          symptom: db.RegExp({
+            regexp: myWord,
+            options: 'i'
+          })
+        }
+      ]),
+        e => {
             console.log(e.data)
             getCurrentPages()["0"].setData({
               medicineInfo: e.data,
-              activeTypeId: -1
+              activeTypeId: -1,
+              activeOrderId: 0
             })
-          }
         }
       )
-      
+    }
     }
     
   }

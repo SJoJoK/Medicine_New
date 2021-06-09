@@ -52,7 +52,7 @@ App({
     isRepete().then((flag) => {
       if(flag) {
         wx.showToast({
-          title: '已经添加过了~',
+          title: '已在购物车中',
         })
       }
       else{
@@ -171,6 +171,17 @@ App({
       .get()
       .then(callback)
       .catch(console.error)
+  },
+
+  getInfo: function (setName, ruleObj, ruleItem, orderFuc,callback) {
+    const db = wx.cloud.database()
+    db.collection(setName)
+    .where(ruleObj)
+      .orderBy(ruleItem, orderFuc)
+      .get({
+        success: callback,
+        fail: console.error
+      })
   },
 
   // 删除集合中的数据

@@ -34,7 +34,7 @@ Page({
       if (err) {
         wx.showModal({
           title: '错误',
-          content: '请您重新下单~',
+          content: '请您重新尝试下单',
         })
       }
     })
