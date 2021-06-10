@@ -6,12 +6,13 @@ Page({
     orders: [],
     hasAddress: false,
     address: {},
-    isAdmin: -1,
+    isAdmin: 0,
     openid: '',
     adiminArr: [
-      '',
-      'oA9Ke4tObqwxqNSfALdVZPkVv7Yc',
-      'oA9Ke4rH2nnqFgFbWIhyQu5bCXPA'
+      //实际发布后，绑定后台管理人员的openid
+      //访问后台只需令isAdmin强制为0
+      //现在已设置为强制为0
+      ''
     ]
   },
   onLoad() {
@@ -58,7 +59,8 @@ Page({
         var isAdmin = null;
         that.setData({
           openid: openid,
-          isAdmin: that.data.adiminArr.indexOf(openid)
+          //isAdmin: that.data.adiminArr.indexOf(openid)
+          isAdmin:0
         })
         app.getInfoWhere('order_master',{
           openid: openid
