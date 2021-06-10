@@ -195,10 +195,11 @@ Page({
   // 下架药品
   downFromLine: function (e) {
     var that = this
-    // console.log(e.currentTarget.id)
+    console.log(e.currentTarget.id)
     app.updateInfo('medicine_stock', e.currentTarget.id, {
       onShow: false
     }, e => {
+      console.log(e)
       that.getManageList()
       wx.showToast({
         title: '已下架',
