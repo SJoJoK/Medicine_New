@@ -3,8 +3,8 @@
     padding: 20rpx 50rpx 20rpx 35rpx;
     font-size: 14px;
     line-height: 25px;
-    border-bottom: 20rpx solid #ededed;
     color: #adadad;
+    border-bottom:20rpx #ededed solid;
 }
 .orders-address::after{
     position: absolute;
@@ -64,6 +64,22 @@
     line-height: 60rpx;
 }
 
+.orders-pro-name{
+margin-left:10rpx;
+}
+
+.orders-pro-price{
+  font-size:30rpx;
+}
+
+.orders-count-num{
+  margin-left:7rpx;
+  font-size:24rpx;
+  
+margin-top:13rpx;
+  color: #adadad;
+}
+
 .orders-footer{
   background-color: white;
     position: fixed;
@@ -79,12 +95,12 @@
     width: 510rpx;
     padding-left: 30rpx;
     box-sizing: border-box;
-    color: #a55350;
+    color: rgb(143, 143, 143);
 }
 .orders-footer .orders-footer-btn{
     display: inline-block;
     width: 240rpx;
     text-align: center;
     color: #fff;
-    background: rgb(248, 188, 76);
+    background: black;
 }

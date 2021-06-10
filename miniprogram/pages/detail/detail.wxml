@@ -21,26 +21,26 @@
     </view>
     <!-- 第二行 -->
     <view class='line2'>
-      <view class='price'>价格:￥{{medicineDetail.price}}</view>
-      <!-- <view class='purchaseFreq'>已售 {{medicineDetail.purchaseFreq}} 份</view> -->
+      <view class='price'>价格：￥{{medicineDetail.price}}</view>
+      <view class='purchaseFreq'>销量：{{medicineDetail.sales}}</view>
     </view>
   </view>
 
   <view class='other-info'>
-        <view class='theDetail'>
-          {{medicineDetail.detail}}
-        </view>
+  <view wx:if="{{medicineDetail.isOTC}}">非处方药</view>
+  <view wx:else>处方药</view>
+  <view>适用症状：{{medicineDetail.symptom}}</view>
+  <view>详情：{{medicineDetail.detail}}</view>
   </view>
 
   <!-- 底部导航 -->
   <view class='detail-nav'>
     <!-- 购物车 -->
     <view class='cart' bindtap='goToCart'>
-      <image src="../../images/icon/cart3.png" mode='scaleToFill'></image>
+      <image src="../../images/icon/cart5.png" mode='scaleToFill'></image>
       <view>购物车</view>
     </view>
     <view class='addToCart' bindtap='addToCart'>加入购物车</view>
-    <view class='buy' bindtap='toBuy'>立即购买</view>
   </view>
 
   <!-- 购物车/购买弹窗 -->
@@ -49,7 +49,7 @@
       <view class='popCard'>
         <!-- 取消按钮 -->
         <view style='width:700rpx;' bindtap='popCancel'>
-          <icon type="cancel" size="20" color='grey' style='float:right'/>
+          <icon type="cancel" size="20" color='black' style='float:right'/>
         </view>
         <!-- 名字 -->
         <view class='popName'>{{medicineDetail.name}}</view>
@@ -65,7 +65,7 @@
           </view>
         </view>
         <!-- 按钮 -->
-        <view class='popButton' bindtap='toCart'>加入购物车</view>
+        <view class='popButton' bindtap='toCart'>确定</view>
       </view>
     </view>
   </view>

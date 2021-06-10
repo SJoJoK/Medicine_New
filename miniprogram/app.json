@@ -11,34 +11,34 @@
     "pages/orders/orders"
   ],
   "window": {
-    "backgroundColor": "#F0F0F0",
+    "backgroundColor": "#FFFFFF",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFF5EE",
-    "navigationBarTitleText": "Fruit-store",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "网上药房",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "selectedColor": "#EEAD0E",
     "color": "#878787",
-    "backgroundColor": "#FFF5EE",
+    "selectedColor": "#FFFFFF",
+    "backgroundColor": "#000000",
     "list": [
       {
         "pagePath": "pages/homepage/homepage",
         "text": "药品",
-        "iconPath": "images/tabBar/homepage-sel.png",
-        "selectedIconPath": "images/tabBar/homepage.png"
+        "iconPath": "images/tabBar/homepage4.png",
+        "selectedIconPath": "images/tabBar/homepage-sel2.png"
       },
       {
         "pagePath": "pages/cart/cart",
         "text": "购物车",
-        "iconPath": "images/tabBar/cart-sel.png",
-        "selectedIconPath": "images/tabBar/cart.png"
+        "iconPath": "images/tabBar/cart4.png",
+        "selectedIconPath": "images/tabBar/cart-sel2.png"
       },
       {
         "pagePath": "pages/me/me",
         "text": "我的",
-        "iconPath": "images/tabBar/me-sel.png",
-        "selectedIconPath": "images/tabBar/me.png"
+        "iconPath": "images/tabBar/me4.png",
+        "selectedIconPath": "images/tabBar/me-sel2.png"
       }
     ]
   },
