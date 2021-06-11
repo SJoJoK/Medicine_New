@@ -3,12 +3,7 @@
   <view class='tapCard'>
     <view class="addCard {{cardNum === 1 ? 'tapOn':'tapOff'}} " bindtap='tapTo1'>添加药品</view>
     <view class="delCard {{cardNum === 2 ? 'tapOn':'tapOff'}} " bindtap='tapTo2'>上架修改</view>
-    <view class="deliver {{cardNum === 3 ? 'tapOn':'tapOff'}} " bindtap='tapTo3'>送货管理</view>
-  </view>
-
-  <!-- 添加药品 -->
-  <view class='addMedicine' wx:if="{{cardNum === 3}}">
-    <button bindtap='offLine'>打烊？</button>
+    <!-- <view class="deliver {{cardNum === 3 ? 'tapOn':'tapOff'}} " bindtap='tapTo3'>送货管理</view> -->
   </view>
 
   <!-----------------------!!!! 上架修改 !!!!---------------------------->
