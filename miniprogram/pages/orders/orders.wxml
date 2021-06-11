@@ -4,7 +4,8 @@
         <view wx:if="{{hasAddress}}" class="orders-address">
             <text class="orders-address-name">姓名：{{address.name}}</text>
             <view class="orders-address-phone">联系电话：{{address.phone}}</view>
-            <view class="orders-address-detail">地址: {{address.message}}</view>
+            <view class="orders-address-detail">区域: {{address.region}}</view>
+            <view class="orders-address-detail">详细地址: {{address.detail}}</view>
         </view>
         <view wx:else class="orders-no-address">添加收货信息</view>
     </navigator>
