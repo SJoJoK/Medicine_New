@@ -1,34 +1,26 @@
 <view class="main">
-    <view class="form-box">
-        <form bindsubmit="formSubmit">
-            <input value="{{address.name}}" name="name" placeholder="姓名"/>
-            <input type="digit" name="phone" value="{{address.phone}}" placeholder="电话号码"/>
+  <view class="form-box">
+    <form bindsubmit="formSubmit">
+      <input value="{{address.name}}" name="name" placeholder="姓名" />
+      <input type="digit" name="phone" value="{{address.phone}}" placeholder="电话号码" />
 
-            <view class="weui-cell__bd cell-title">选择校区:</view>
-            <view class="weui-cell__ft">
-              <picker range="{{school_Arr}}" value="{{address.schoolName}}" name='schoolName'  bindchange="getSchool">
-                {{school_Arr[address.schoolName]||'选择'}}
-              </picker>
-            </view>
+      <view class="section">
+        <picker mode="region" bindchange="getRegion" value="{{address.region}}"
+          custom-item="{{address.customItem}}">
+          <view class="picker">
+            地址：{{address.region[0]}}，{{address.region[1]}}，{{address.region[2]}}
+          </view>
+        </picker>
+      </view>
 
-            <view class="weui-cell__bd cell-title">详细地址：</view>
-            <view class="weui-cell__ft">
-              <picker range="{{address_Arr}}" value="{{address.addressItem}}" name='addressItem' bindchange="getAddress">
-                <view class="weui-input">{{address_Arr[address.addressItem]||'选择'}}</view>
-              </picker>
-            </view>
+      <view>详细地址：</view>
+      <view class='message'>
+        <textarea name="detail" value="{{address.detail}}"></textarea>
+      </view>
+      
+      <button form-type="submit">保存</button>
+    </form>
+  </view>
 
-            <view class='slider'>
-              <view>宿舍楼号：</view>
-              <slider name="detail" min='0' max='60' show-value value="{{address.detail}}"></slider>
-            </view>
-
-            <view>备注：</view>
-            <view class='message'>
-              <textarea name="message" value="{{address.message}}"></textarea>
-            </view>
-            <button form-type="submit">保存</button>
-        </form>
-    </view>
 
 </view>
