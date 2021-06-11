@@ -15,7 +15,6 @@ Page({
   onReady() {
     const self = this;
     // console.log(app.globalData.carts)
-
     // 32位随机字符串
     var nonce_str = app.RndNum()
 
@@ -24,8 +23,11 @@ Page({
       name: 'getIP'
     }).then(e => {
       if (e) {
-        let spbill_create_ip = e.result.body.split("query\"\:\"")[1].split("\"\,\"")[0]
-        console.log("IP地址为：" + spbill_create_ip)
+        // console.log(e.result.body)
+        let spbill_create_ip = e.result.body
+        .split("query\"\:\"")[1]
+         .split("\"\}")[0]
+        console.log(spbill_create_ip)
         self.setData({
           spbill_create_ip: spbill_create_ip
         })
@@ -34,7 +36,7 @@ Page({
       if (err) {
         wx.showModal({
           title: '错误',
-          content: '请您重新尝试下单',
+          content: '获取IP失败！请您重新尝试下单',
         })
       }
     })
@@ -75,7 +77,6 @@ Page({
       total: total.toFixed(2)
     })
   },
-
 
   // 获取用户openid
   getOpenid() {

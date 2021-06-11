@@ -16,7 +16,7 @@ App({
       carts:[],  //购物车
       tmpNum: 0,
       tempFilePaths: "",
-      admin:["Mr.Voyz"],
+      admin:["Medicine_SE"],
       openId: null,
       appid: 'wx0dd8c5c9ebe90a78',
       mch_id: '1519277861',
