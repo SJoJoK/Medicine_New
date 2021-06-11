@@ -17,7 +17,7 @@ Page({
     // console.log(app.globalData.carts)
     // 32位随机字符串
     var nonce_str = app.RndNum()
-
+    this.popup = this.selectComponent("#popup");
     // 获取ip地址
     wx.cloud.callFunction({
       name: 'getIP'
@@ -25,8 +25,8 @@ Page({
       if (e) {
         // console.log(e.result.body)
         let spbill_create_ip = e.result.body
-        .split("query\"\:\"")[1]
-         .split("\"\}")[0]
+          .split("query\"\:\"")[1]
+          .split("\"\}")[0]
         console.log(spbill_create_ip)
         self.setData({
           spbill_create_ip: spbill_create_ip
@@ -36,7 +36,7 @@ Page({
       if (err) {
         wx.showModal({
           title: '错误',
-          content: '获取IP失败！请您重新尝试下单',
+          content: '获取IP失败',
         })
       }
     })
@@ -48,8 +48,20 @@ Page({
     })
     this.getOpenid();
     this.getTotalPrice();
+    this.popup = this.selectComponent("#popup");
   },
   // onReady↑
+ 
+  //取消事件
+  _error() {
+    console.log('你点击了取消');
+    this.popup.hidePopup();
+  },
+  //确认事件
+  _success() {
+    console.log('你点击了确定');
+    this.popup.hidePopup();
+  },
 
   onShow: function () {
     const self = this;
@@ -332,6 +344,8 @@ Page({
             'payTime': app.CurrentTime_show()
           }, e => {
             console.log("订单状态已修改：【支付成功】" + e)
+            this.popup.showPopup()
+            console.log(this)
             wx.showToast({
               title: '支付成功',
             })
@@ -348,6 +362,65 @@ Page({
     }
   },
 
+  toPay_new: function () {
+    var that = this
+    // ------获取prepay_id，所需的签名字符串------
+    // 生成订单号
+    var out_trade_no = (new Date().getTime() + app.RndNum(6)).toString()
+    // -----生成字符串------
+    var stringA =
+      "appid=" + app.globalData.appid
+      + "&attach=test"
+      + "&body=JSAPItest"
+      + "&device_info=WEB"
+      + "&mch_id=" + app.globalData.mch_id
+      + "&nonce_str=" + that.data.nonce_str
+      + "&notify_url=http://www.weixin.qq.com/wxpay/pay.php"
+      + "&openid=" + that.data.openid
+      + "&out_trade_no=" + out_trade_no
+      + "&spbill_create_ip=" + that.data.spbill_create_ip
+      + "&time_expire=" + app.beforeNowtimeByMin(-15)
+      + "&time_start=" + app.CurrentTime()
+      + "&total_fee=" + parseInt(that.data.total * 100)
+      + "&trade_type=JSAPI";
+    var stringSignTemp = stringA + "&key=" + app.globalData.apikey
+    // 签名MD5加密
+    var sign = md5.md5(stringSignTemp).toUpperCase()
+    // console.log("签名：" + stringSignTemp)
+    var openid = that.data.openid
+    // ------生成订单信息-------
+    let tmp = that.data.address
+    tmp['orderTime'] = app.CurrentTime_show()
+    tmp['orderSuccess'] = true
+    tmp['payTime'] = ''
+    tmp['paySuccess'] = false
+    tmp['sending'] = false
+    tmp['finished'] = false
+
+    const order_master = tmp
+
+    var tmpList = []
+    that.data.orders.forEach((val, idx, obj) => {
+      tmpList.push([val.name, val.num, val.price])
+    })
+    order_master['medicineList'] = tmpList
+    order_master['total'] = that.data.total
+    order_master['openid'] = that.data.openid
+    order_master['out_trade_no'] = out_trade_no
+
+    console.log(order_master)
+    that.setData({
+      address: order_master
+    })
+    // 上传数据库
+    app.addRowToSet('order_master', order_master, e => {
+      console.log("订单状态已修改：【订单生成】" + e)
+    })
+    this.popup.showPopup()
+    wx.showToast({
+      title: '支付成功',
+    })
+  },
   // 支付后的订单信息
 
 
