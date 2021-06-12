@@ -99,6 +99,15 @@ Page({
     })
   },
 
+  
+  goToHealthDoc: function () {
+    wx.navigateTo({
+      url: '/pages/healthdoc/healthdoc',
+    })
+  }
+})
+
+
   toPay: function (e) {
     const that = this
     const id = e.currentTarget.dataset._id
@@ -182,4 +191,4 @@ Page({
   },
 
 
-})
+

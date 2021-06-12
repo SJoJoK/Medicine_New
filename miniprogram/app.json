@@ -8,7 +8,9 @@
     "pages/me/me",
     "pages/detail/detail",
     "pages/address/address",
-    "pages/orders/orders"
+    "pages/orders/orders",
+    "pages/healthdoc/healthdoc"
+
   ],
   "window": {
     "backgroundColor": "#FFFFFF",
