@@ -4,7 +4,8 @@
         <view wx:if="{{hasAddress}}" class="orders-address">
             <text class="orders-address-name">姓名：{{address.name}}</text>
             <view class="orders-address-phone">联系电话：{{address.phone}}</view>
-            <view class="orders-address-detail">地址: {{address.message}}</view>
+            <view class="orders-address-detail">区域: {{address.region}}</view>
+            <view class="orders-address-detail">详细地址: {{address.detail}}</view>
         </view>
         <view wx:else class="orders-no-address">添加收货信息</view>
     </navigator>
@@ -20,6 +21,8 @@
 
     <view class="orders-footer">
         <view class="orders-footer-total">合计：￥{{total}}</view>
-        <view class="orders-footer-btn" bindtap="toPay">去支付</view>
+        <view class="orders-footer-btn" bindtap="toPay_new">去支付</view>
     </view>
+
+    <!-- <popup id='popup' title='支付确定' content='确定要支付吗' btn_no='否' btn_ok='是' bind:error="_notpay" bind:success="_pay"> </popup> -->
 </view>

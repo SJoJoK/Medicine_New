@@ -7,44 +7,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-    fruitInfo: {},
+    medicineInfo: {},
     tmpUrlArr: [],
-    delFruitId: "",
+    delMedicineId: "",
     cardNum: 1,
     files: [],
     time:0,
     manageList:[], //管理页面信息列表
+    OTC:0,
+    isOTC:true,
 
     // 上传的信息
-    fruitID:null, //水果编号
-    name:null,    //水果名称
+    medicineID:null, //药品编号
+    name:null,    //药品名称
     price:null,   //价格
-    unit:null,    //单位
-    detail:"",    //描述
-    myClass:0,    //今日特惠
-    recommend:0,  //店主推荐
+    theClass:null,    //类别
+    theDetail:"",    //描述
+    symptom:null, //症状
     onShow:true,  //上架
 
-    myClass_Arr: [
-      '否',
-      '是'
-    ],
-    recommend_Arr: [
-      '否',
-      '是'
+    isOTC_Arr:[
+      "是",
+      "否"
     ],
     reFresh:null
   },
 
   //------------------------!!! 获取信息 !!!------------------------
-  // 获取水果编号
-  getFruitID: function (e) {
+  // 获取药品编号
+  getMedicineID: function (e) {
     this.setData({
-      fruitID: parseInt(e.detail.value)
+      medicineID: parseInt(e.detail.value)
     })
   },
 
-  // 获取水果名称
+  // 获取药品名称
   getName: function (e) {
     this.setData({
       name: e.detail.value
@@ -58,11 +55,37 @@ Page({
     })
   },
 
-  // 获取单位
-  getUnit: function (e) {
+  // 获取分类
+  getClass: function (e) {
     this.setData({
-      unit: e.detail.value
+      theClass: e.detail.value
     })
+  },
+
+  
+  // 获取症状
+  getSymptom: function (e) {
+    this.setData({
+      symptom: e.detail.value
+    })
+  },
+
+  //获取OTC
+  getOTC:function(e){
+    // console.log(e.detail.value)
+      this.setData({
+        isOTC:e.detail.value == '0'?true:false,
+        OTC:e.detail.value
+      })
+      console.log(this.data.OTC)
+  },
+
+  //药品详细信息
+  getInfoText: function (e) {
+    this.setData({
+      theDetail: e.detail.value
+    })
+    console.log(this.data.theDetail)
   },
 
   //选择照片并预览（预览地址在files，上传后的地址在tmpUrlArr）
@@ -74,7 +97,7 @@ Page({
           files: that.data.files.concat(res.tempFilePaths)
         });
         
-        app.upToClound("imgSwiper", that.data.name + Math.random().toString(), 
+        app.upToClound("res", that.data.name + Math.random().toString(), 
         res.tempFilePaths["0"], tmpUrl => {
           // console.log(tmpUrl)
           that.data.tmpUrlArr.push(tmpUrl)
@@ -91,31 +114,6 @@ Page({
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
       urls: that.data.tmpUrlArr // 需要预览的图片http链接列表
-    })
-  },
-
-  //水果详细信息
-  getInfoText: function (e) {
-    var that = this
-    that.setData({
-
-    })
-    this.data.detail = e.detail.value;
-  },
-
-  // 今日特惠
-  getMyClass: function (e) {
-    var that = this
-    this.setData({
-      myClass: e.detail.value.toString()
-    })
-  },
-
-  // 店主推荐
-  getRecommend: function (e) {
-    var that = this
-    this.setData({
-      recommend: e.detail.value.toString()
     })
   },
 
@@ -141,25 +139,28 @@ Page({
   },
 
   // ----------------------!!!  提交操作  !!!---------------------
-  // 添加水果信息表单
-  addFruitInfo: function(e){
+  // 添加药品信息表单
+  addMedicineInfo: function(e){
     const that = this
     if (that.data.name && that.data.price){
       new Promise((resolve, reject) => {
-        const { fruitID, name, price, unit, detail, myClass, recommend, tmpUrlArr, onShow } = that.data
-        const theInfo = { fruitID, name, price, unit, detail, myClass, recommend, tmpUrlArr, onShow }
+        const { medicineID, name, price, symptom, isOTC, onShow } = that.data
+        const theInfo = { medicineID, name, price, symptom, isOTC,onShow }
+        console.log(theInfo)
+        theInfo['imgArr'] = that.data.tmpUrlArr
         theInfo['imgUrl'] = that.data.tmpUrlArr[0]
-        theInfo['time'] = parseInt(app.CurrentTime())
+        theInfo['class'] = that.data.theClass
+        theInfo['detail'] = that.data.theDetail
         resolve(theInfo)
       }).then(theInfo => {
         // 上传所有信息
-        app.addRowToSet('fruit-board', theInfo, e => {
+        app.addRowToSet('medicine_stock', theInfo, e => {
           console.log(e)
           wx.showToast({
             title: '添加成功',
           })
         })
-        app.getInfoByOrder('fruit-board', 'time', 'desc',
+        app.getInfoByOrder('medicine_stock', 'time', 'desc',
           e => {
             that.setData({
               manageList: e.data
@@ -176,12 +177,12 @@ Page({
     
   },
 
-  // ----------------------!!!  修改水果参数  !!!----------------------
-  // 上架水果
+  // ----------------------!!!  修改药品参数  !!!----------------------
+  // 上架药品
   upToLine:function(e){
     var that = this
     // console.log(e.currentTarget.id)
-    app.updateInfo('fruit-board', e.currentTarget.id,{
+    app.updateInfo('medicine_stock', e.currentTarget.id,{
       onShow: true
     },e=>{
       that.getManageList()
@@ -191,13 +192,14 @@ Page({
     })
   },
   
-  // 下架水果
+  // 下架药品
   downFromLine: function (e) {
     var that = this
-    // console.log(e.currentTarget.id)
-    app.updateInfo('fruit-board', e.currentTarget.id, {
+    console.log(e.currentTarget.id)
+    app.updateInfo('medicine_stock', e.currentTarget.id, {
       onShow: false
     }, e => {
+      console.log(e)
       that.getManageList()
       wx.showToast({
         title: '已下架',
@@ -205,25 +207,25 @@ Page({
     })
   },
 
-  // 绑定删除水果名称参数
-  getDelFruitId: function(e) {
+  // 绑定删除药品名称参数
+  getDelMedicineId: function(e) {
     var that = this
-    app.getInfoWhere('fruit-board',{
+    app.getInfoWhere('medicine_stock',{
       name: e.detail.value
     },res=>{
       that.setData({
-        delFruitId: res.data["0"]._id
+        delMedicineId: res.data["0"]._id
       })
     })
   },
 
-  // 删除水果
-  deleteFruit: function() {
-    // app.deleteInfoFromSet('fruit-board',"葡萄")
+  // 删除药品
+  deleteMedicine: function() {
+    // app.deleteInfoFromSet('medicine_stock',"葡萄")
     var that = this
-    console.log(that.data.delFruitId)
+    console.log(that.data.delMedicineId)
     new Promise((resolve,reject)=>{
-      app.deleteInfoFromSet('fruit-board', that.data.delFruitId)
+      app.deleteInfoFromSet('medicine_stock', that.data.delMedicineId)
     })
     .then(that.getManageList())
   },
@@ -234,15 +236,17 @@ Page({
     app.getInfoWhere('setting', {
       option: "offLine"
     }, res => {
-      let ch = !res.data["0"].offLine
+      console.log(res)
+      const ch = !res.data["0"].offLine
+      console.log(res.data["0"])
       app.updateInfo('setting', res.data["0"]._id,{
         offLine: ch
       },e=>{
+        console.log(e)
         wx.showToast({
           title: '操作成功',
         })
       })
-      // console.log(res)
     })
   },
 
@@ -252,7 +256,7 @@ Page({
    */
   getManageList:function(){
     var that = this
-    app.getInfoByOrder('fruit-board', 'time', 'desc',
+    app.getInfoByOrder('medicine_stock', 'time', 'desc',
       e => {
         that.setData({
           manageList: e.data

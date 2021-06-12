@@ -16,19 +16,12 @@ App({
       carts:[],  //购物车
       tmpNum: 0,
       tempFilePaths: "",
-      admin:["Mr.Voyz"],
+      admin:["Medicine_SE"],
       openId: null,
       appid: 'wx0dd8c5c9ebe90a78',
       mch_id: '1519277861',
       apikey: 'James487493259359826923695832443',
       offLine:false,
-      school_Arr: [
-        "交大",
-        "华师大"
-      ],
-      address_Arr: [
-        "宿舍楼", "学院", "图书馆", "餐厅", "教学楼", "其他"
-      ],
     }
   },
 
@@ -59,6 +52,10 @@ App({
         this.globalData.carts.push(newCartItem)
       }
     })
+  },
+
+  clearCart: function (newCartItem) {
+    this.globalData.carts=[]
   },
 
   // 随机数生成函数
