@@ -99,6 +99,13 @@ Page({
     })
   },
 
+  
+  goToHealthDoc: function () {
+    wx.navigateTo({
+      url: '/pages/healthdoc/healthdoc',
+    })
+  },
+
   toPay: function (e) {
     const that = this
     const id = e.currentTarget.dataset._id
@@ -115,7 +122,6 @@ Page({
       }
     })
   },
-
 
   _notpay(id) {
     console.log("取消支付")
@@ -145,7 +151,6 @@ Page({
       })
     })
   },
-
 
   toConfirm(e) {
     const that = this
@@ -233,3 +238,4 @@ Page({
     })
   },
 })
+

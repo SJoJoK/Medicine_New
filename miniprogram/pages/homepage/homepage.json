@@ -3,5 +3,6 @@
   "usingComponents": {
     "mySearch":"/components/search/search",
     "swiper": "/components/swiper/swiper"
-  }
+  },
+  "enable-flex":true
 }
