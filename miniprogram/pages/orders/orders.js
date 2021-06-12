@@ -9,7 +9,8 @@ Page({
     orders: [],
     myList: [],
     openid: '',
-    nonce_str: ''
+    nonce_str: '',
+    trade_no:null
   },
 
   onReady() {
@@ -53,14 +54,31 @@ Page({
   // onReady↑
  
   //取消事件
-  _error() {
+  _notpay() {
     console.log('你点击了取消');
     this.popup.hidePopup();
   },
   //确认事件
-  _success() {
-    console.log('你点击了确定');
-    this.popup.hidePopup();
+  _pay() {
+    console.log("确定支付")
+    var tmpOutNum = this.data.trade_no
+    // 发送支付请求，默认成功
+    app.getInfoWhere('order_master', {
+      'out_trade_no': tmpOutNum
+    }, e => {
+      var orderId = e.data["0"]._id
+      app.updateInfo('order_master', orderId, {
+        'paySuccess': true,
+        'payTime': app.CurrentTime_show()
+      }, e => {
+        console.log("订单状态已修改：【支付成功】" + e)
+        this.popup.showPopup()
+        console.log(this)
+        wx.showToast({
+          title: '支付成功',
+        })
+      })
+    })
   },
 
   onShow: function () {
@@ -410,16 +428,17 @@ Page({
 
     console.log(order_master)
     that.setData({
-      address: order_master
+      address: order_master,
+      trade_no:out_trade_no
     })
     // 上传数据库
     app.addRowToSet('order_master', order_master, e => {
       console.log("订单状态已修改：【订单生成】" + e)
     })
     this.popup.showPopup()
-    wx.showToast({
-      title: '支付成功',
-    })
+    // wx.showToast({
+    //   title: '支付成功',
+    // })
   },
   // 支付后的订单信息
 
