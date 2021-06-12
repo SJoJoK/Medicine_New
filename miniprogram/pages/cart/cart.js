@@ -11,17 +11,20 @@ Page({
   },
 
   onLoad(e) {
-    // var self = this
-    // self.getTotalPrice();
-    // self.selectAll();
   },
 
   onShow() {
     var self = this
-    self.data.carts = app.globalData.carts
+    this.setData({carts:app.globalData.carts})
+    console.log(self.data.carts)
     if (app.globalData.carts.length != 0) {
       self.setData({
         hasList: true,
+      });
+    }
+    else{
+      self.setData({
+        hasList: false,
       });
     } 
     self.selectAll();

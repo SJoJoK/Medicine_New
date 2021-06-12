@@ -27,7 +27,8 @@
         <view wx:if="{{hasAddress}}" class="address-list">
             <view>姓名：{{address.name}}</view>
             <view>电话：{{address.phone}}</view>
-            <view>宿舍楼：{{address.detail}}</view>
+            <view>区域：{{address.region}}</view>
+            <view>详细地址：{{address.detail}}</view>
         </view>
     </view>
 
@@ -36,20 +37,28 @@
         <view class="orders">我的订单</view>
         <view class="orders-list" wx:for="{{orders}}" wx:key="index">
 
+            <view class="orders-number" wx:if="{{!item.paySuccess}}">订单状态：未支付</view>
             <view class="orders-number" wx:if="{{item.paySuccess && !item.sending}}">订单状态：已支付</view>
             <view class="orders-number" wx:if="{{item.sending && !item.finished}}">订单状态：配送中</view>
             <view class="orders-number" wx:if="{{item.finished}}">订单状态：已送达</view>
 
-            <view class="orders-number" wx:if="{{item.paySuccess && !item.sending}}">下单时间：{{item.orderTime}}</view>
+            <view class="orders-number" wx:if="{{item.paySuccess}}">下单时间：{{item.orderTime}}</view>
             <view class="orders-number" wx:if="{{item.finished}}">送达时间：{{item.finishedTime}}</view>
 
             <view style='padding:15rpx 0;'>
-              <view wx:for="{{item.fruitList}}" wx:for-item="fruitArr" wx:key="fruit">{{fruitArr[0]}} × {{fruitArr[1]}}</view>
+              <view wx:for="{{item.medicineList}}" wx:for-item="medicineArr" wx:key="medicine">{{medicineArr[0]}} × {{medicineArr[1]}}</view>
             </view>
                 
-            <view class="orders-footer">
-                <text>实付：￥{{item.total}}</text>
+            <view class="orders-footer" wx:if="{{!item.paySuccess}}">
+                <text>需付：￥{{item.total}}</text>
+                <view class="orders-btn" bindtap='toPay' data-_ID="{{item._id}}">去付款</view>
             </view>
+
+            <view class="orders-footer" wx:else>
+                <text>实付：￥{{item.total}}</text>
+                <view class="orders-btn" wx:if="{{item.sending && !item.finished}}" bindtap='toConfirm' data-_ID="{{item._id}}">确认收货</view>
+            </view>
+
         </view>
     </view>
 </view>
