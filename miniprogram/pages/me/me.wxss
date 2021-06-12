@@ -111,11 +111,12 @@
     text-align: right;
 }
 .orders-footer .orders-btn{
-    float: right;
+    float: left;
+    text-align: center;
     width: 170rpx;
     height: 60rpx;
     line-height:60rpx;
     border-radius: 6rpx;
-    background: #b42f2d;
+    background: #008c00;
     color: #fff;
 }
