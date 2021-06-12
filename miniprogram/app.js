@@ -182,15 +182,10 @@ App({
   },
 
   // 删除集合中的数据
-  deleteInfoFromSet: function (setName,fruitId) {
+  deleteInfoFromSet: function (setName,medicineId,callback) {
     const db = wx.cloud.database()
-      db.collection(setName).doc(fruitId).remove({
-      success: e=>{
-        wx.showToast({
-          title: '删除成功',
-        })
-        console.log(e)
-      },
+      db.collection(setName).doc(medicineId).remove({
+      success: callback,
       fail: console.error
     })
   },

@@ -49,6 +49,7 @@
             <view class="orders-footer" wx:if="{{!item.paySuccess}}">
                 <text>需付：￥{{item.total}}</text>
                 <view class="orders-btn" bindtap='toPay' data-_ID="{{item._id}}">去付款</view>
+                <view class="orders-btn" bindtap='toCancel' data-_ID="{{item._id}}">取消订单</view>
             </view>
 
             <view class="orders-footer" wx:else>

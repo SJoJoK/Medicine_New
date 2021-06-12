@@ -116,6 +116,7 @@ Page({
     })
   },
 
+
   _notpay(id) {
     console.log("取消支付")
     app.updateInfo('order_master', id, {
@@ -181,5 +182,30 @@ Page({
     })
   },
 
+  toCancel: function (e) {
+    const that = this
+    const id = e.currentTarget.dataset._id
+    console.log(id)
+    wx.showModal({
+      title: '取消订单',
+      content: '确定要取消吗',
+      success(res) {
+        if (res.confirm) {
+          that._cancel(id)
+        }
+      }
+    })
+  },
 
+  _cancel(id) {
+    console.log("取消订单")
+    app.deleteInfoFromSet('order_master', id, e => {
+      console.log("订单状态已修改：【已取消订单】" + e)
+      wx.showToast({
+        title: '取消订单',
+        duration: 1000,
+        success: this.getOpenidAndOrders()
+      })
+    })
+  },
 })
