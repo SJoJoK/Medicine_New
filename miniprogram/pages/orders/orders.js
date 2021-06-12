@@ -61,12 +61,12 @@ Page({
   //确认事件
   _pay() {
     console.log("确定支付")
-    var tmpOutNum = this.data.trade_no
+    const tmpOutNum = this.data.trade_no
     // 发送支付请求，默认成功
     app.getInfoWhere('order_master', {
       'out_trade_no': tmpOutNum
     }, e => {
-      var orderId = e.data["0"]._id
+      const orderId = e.data["0"]._id
       app.updateInfo('order_master', orderId, {
         'paySuccess': true,
         'payTime': app.CurrentTime_show()

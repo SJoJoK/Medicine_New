@@ -44,7 +44,7 @@ Page({
 
   // ----------------------!!!  订单管理  !!!----------------------
   // 已支付-发货
-  boxFruit: function(e) {
+  boxMedicine: function(e) {
     var that = this
     console.log(e.currentTarget.id)
     app.updateInfo('order_master', e.currentTarget.id, {
@@ -59,7 +59,7 @@ Page({
   },
 
   // 已发货-送达
-  sendingFruit: function(e) {
+  sendingMedicine: function(e) {
     var that = this
     console.log(e.currentTarget.id)
     app.updateInfo('order_master', e.currentTarget.id, {
