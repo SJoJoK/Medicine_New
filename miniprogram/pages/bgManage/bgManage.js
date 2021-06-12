@@ -62,13 +62,41 @@ Page({
   sendingMedicine: function(e) {
     var that = this
     console.log(e.currentTarget.id)
-    app.updateInfo('order_master', e.currentTarget.id, {
-      finished: true,
-      finishedTime: app.CurrentTime_show()
+    const id = e.currentTarget.id
+    const db = wx.cloud.database()
+    console.log("确定收货")
+    app.getInfoWhere('order_master', {
+      _id: id
     }, e => {
-      that.getAllList()
-      wx.showToast({
-        title: '【已送达】',
+      console.log(e.data[0].medicineList)
+      const tmp = e.data[0].medicineList
+      tmp.forEach(
+        function (item) {
+          app.getInfoWhere('medicine_stock', {
+            name: item[0]
+          }, e => {
+            console.log(e)
+            const mid = e.data[0]._id
+            const delta = item[1]
+            app.updateInfo('medicine_stock', mid, {
+              sales: db.command.inc(delta)
+            }, e => {
+              console.log(e)
+              console.log("销量已增加" + e)
+            })
+          })
+        }
+      )
+      app.updateInfo('order_master', id, {
+        finished: true,
+        finishedTime: app.CurrentTime_show()
+      }, e => {
+        console.log("订单状态已修改：【已确认收货】" + e)
+        wx.showToast({
+          title: '确认收货',
+          duration: 1000,
+          success: this.getOpenidAndOrders()
+        })
       })
     })
   },

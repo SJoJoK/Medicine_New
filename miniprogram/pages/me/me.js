@@ -55,7 +55,7 @@ Page({
     wx.cloud.callFunction({
       name: 'add',
       complete: res => {
-        console.log('云函数获取到的openid: ', res.result.openId)
+        // console.log('云函数获取到的openid: ', res.result.openId)
         var openid = res.result.openId;
         var isAdmin = null;
         that.setData({
@@ -72,7 +72,7 @@ Page({
         app.getInfoWhere('order_master', {
           openid: openid
         }, e => {
-          console.log(e.data)
+          // console.log(e.data)
           var tmp = []
           var len = e.data.length
           for (var i = 0; i < len; i++) {
@@ -84,7 +84,7 @@ Page({
         })
       }
     })
-    console.log(that.data)
+    // console.log(that.data)
   },
 
   goToBgInfo: function () {
@@ -168,16 +168,40 @@ Page({
   },
 
   _confirm(id) {
+    const db = wx.cloud.database()
     console.log("确定收货")
-    app.updateInfo('order_master', id, {
-      finished: true,
-      finishedTime: app.CurrentTime_show()
+    app.getInfoWhere('order_master', {
+      _id: id
     }, e => {
-      console.log("订单状态已修改：【已确认收货】" + e)
-      wx.showToast({
-        title: '确认收货',
-        duration: 1000,
-        success: this.getOpenidAndOrders()
+      console.log(e.data[0].medicineList)
+      const tmp = e.data[0].medicineList
+      tmp.forEach(
+        function (item) {
+          app.getInfoWhere('medicine_stock', {
+            name: item[0]
+          }, e => {
+            console.log(e)
+            const mid = e.data[0]._id
+            const delta = item[1]
+            app.updateInfo('medicine_stock', mid, {
+              sales: db.command.inc(delta)
+            }, e => {
+              console.log(e)
+              console.log("销量已增加" + e)
+            })
+          })
+        }
+      )
+      app.updateInfo('order_master', id, {
+        finished: true,
+        finishedTime: app.CurrentTime_show()
+      }, e => {
+        console.log("订单状态已修改：【已确认收货】" + e)
+        wx.showToast({
+          title: '确认收货',
+          duration: 1000,
+          success: this.getOpenidAndOrders()
+        })
       })
     })
   },

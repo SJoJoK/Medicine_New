@@ -151,6 +151,7 @@ Page({
         theInfo['imgUrl'] = that.data.tmpUrlArr[0]
         theInfo['class'] = that.data.theClass
         theInfo['detail'] = that.data.theDetail
+        theInfo['sales'] = 0
         resolve(theInfo)
       }).then(theInfo => {
         // 上传所有信息
