@@ -54,6 +54,10 @@ App({
     })
   },
 
+  clearCart: function (newCartItem) {
+    this.globalData.carts=[]
+  },
+
   // 随机数生成函数
   RndNum: function(){
     return Math.random().toString(32).substr(2, 15);

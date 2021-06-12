@@ -41,13 +41,13 @@ Component({
     //隐藏弹框
     hidePopup: function () {
       this.setData({
-        flag: !this.data.flag
+        flag: true
       })
     },
     //展示弹框
     showPopup () {
       this.setData({
-        flag: !this.data.flag
+        flag: false
       })
     },
     /*
