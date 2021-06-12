@@ -236,15 +236,17 @@ Page({
     app.getInfoWhere('setting', {
       option: "offLine"
     }, res => {
-      let ch = !res.data["0"].offLine
+      console.log(res)
+      const ch = !res.data["0"].offLine
+      console.log(res.data["0"])
       app.updateInfo('setting', res.data["0"]._id,{
         offLine: ch
       },e=>{
+        console.log(e)
         wx.showToast({
           title: '操作成功',
         })
       })
-      // console.log(res)
     })
   },
 
