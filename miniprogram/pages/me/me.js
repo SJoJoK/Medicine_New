@@ -89,6 +89,12 @@ Page({
     wx.navigateTo({
       url: '/pages/bgManage/bgManage',
     })
+  },
+  
+  goToHealthDoc: function () {
+    wx.navigateTo({
+      url: '/pages/healthdoc/healthdoc',
+    })
   }
-
 })
+

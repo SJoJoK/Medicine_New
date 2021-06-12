@@ -7,10 +7,13 @@
         <view class='nickname'>
           <open-data type="userNickName"></open-data>
         </view>
+        <view class="healthDoc">
+        <!-- 相对路径寻址 -->
+            <image bindtap="goToHealthDoc" src="../../images/icon/health.png"class="healthicon" style="position: relative; left: 0rpx; top: -5rpx"></image>
+            <view class="text">健康画像</view>
+        </view>
         <!-- <text class="nickname">{{nickname}}</text> -->
     </view>
-
-    <!-- 后台管理 -->
     <view class="bgInfo {{openid}}" bindtap='goToBgInfo' hidden="{{!(isAdmin >= 0)}}">后台管理</view>
 
     <!-- 订单管理 -->

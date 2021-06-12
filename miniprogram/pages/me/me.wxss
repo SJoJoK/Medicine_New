@@ -21,6 +21,36 @@
     float: right;
 }
 
+.header .healthDoc{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: -1rpx;
+    right: 30rpx;
+    width: 30%;
+    height: 100%;
+    font-size: 25rpx;
+}
+
+.healthDoc .healthicon{
+    position: relative;
+    display: flex;
+    width: 30%;
+    height: 30%;
+    top: -10rpx;
+}
+
+.healthDoc .text{
+    position: relative;
+    display: inline-flex;
+    height: 30rpx;
+    top: -30rpx;
+    
+}
+
+
 .bgInfo {margin: 20rpx 10rpx 20rpx 10rpx;border: 0.5rpx #EE6A50 dotted;border-radius: 10rpx;text-align: center;background: #EE6A50;color: white;height: 65rpx;line-height: 65rpx;font-size: 28rpx;}
 
 .address-box{
