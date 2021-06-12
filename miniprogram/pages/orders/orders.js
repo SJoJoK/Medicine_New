@@ -18,7 +18,7 @@ Page({
     // console.log(app.globalData.carts)
     // 32位随机字符串
     var nonce_str = app.RndNum()
-    this.popup = this.selectComponent("#popup");
+    // this.popup = this.selectComponent("#popup");
     // 获取ip地址
     // wx.cloud.callFunction({
     //   name: 'getIP'
@@ -50,7 +50,7 @@ Page({
     })
     this.getOpenid();
     this.getTotalPrice();
-    this.popup = this.selectComponent("#popup");
+    // this.popup = this.selectComponent("#popup");
   },
 
   //取消事件
@@ -64,16 +64,16 @@ Page({
       const orderId = e.data["0"]._id
       app.updateInfo('order_master', orderId, {
         'paySuccess': false,
-        'payTime': app.CurrentTime_show()
+        // 'payTime': app.CurrentTime_show()
       }, e => {
         console.log("订单状态已修改：【取消支付】" + e)
         app.clearCart()
-        this.popup.hidePopup()
+        // this.popup.hidePopup()
         wx.showToast({
           title: '取消支付',
           duration: 1000,
           success: function () {
-            setTimeout(function() {
+            setTimeout(function () {
               wx.switchTab({
                 url: '../cart/cart',
               })
@@ -83,7 +83,7 @@ Page({
       })
     })
   },
-  
+
   //确认事件
   _pay() {
     console.log("确定支付")
@@ -99,12 +99,12 @@ Page({
       }, e => {
         console.log("订单状态已修改：【支付成功】" + e)
         app.clearCart()
-        this.popup.hidePopup()
+        // this.popup.hidePopup()
         wx.showToast({
           title: '支付成功',
           duration: 1000,
           success: function () {
-            setTimeout(function() {
+            setTimeout(function () {
               wx.switchTab({
                 url: '../cart/cart',
               })
@@ -155,6 +155,7 @@ Page({
     })
   },
 
+  //去支付
   toPay_new: function () {
     var that = this
     // ------获取prepay_id，所需的签名字符串------
@@ -210,11 +211,20 @@ Page({
     app.addRowToSet('order_master', order_master, e => {
       console.log("订单状态已修改：【订单生成】" + e)
     })
-    this.popup.showPopup()
-    // wx.showToast({
-    //   title: '支付成功',
-    // })
+
+    wx.showModal({
+      title: '支付确认',
+      content: '确定要支付吗',
+      success(res) {
+        if (res.confirm) {
+          that._pay()
+        } else if (res.cancel) {
+          that._notpay()
+        }
+      }
+    })
   },
+
   // 支付后的订单信息
   getListAfterPay: function (that) {
     var p = new Promise((resolve, reject) => {

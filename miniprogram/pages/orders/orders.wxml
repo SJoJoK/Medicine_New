@@ -24,6 +24,5 @@
         <view class="orders-footer-btn" bindtap="toPay_new">去支付</view>
     </view>
 
-    <popup id='popup' title='支付确定' content='确定要支付吗' btn_no='否' btn_ok='是' bind:error="_notpay" bind:success="_pay">
-    </popup>
+    <!-- <popup id='popup' title='支付确定' content='确定要支付吗' btn_no='否' btn_ok='是' bind:error="_notpay" bind:success="_pay"> </popup> -->
 </view>
