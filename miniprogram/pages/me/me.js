@@ -8,10 +8,11 @@ Page({
     address: {},
     isAdmin: 0,
     openid: '',
-    adiminArr: [
+    adminArr: [
       //实际发布后，绑定后台管理人员的openid
       //访问后台只需令isAdmin强制为0
       //现在已设置为强制为0
+      //具体看getOpenidAndOrders()中的描述
       ''
     ]
   },
@@ -59,8 +60,14 @@ Page({
         var isAdmin = null;
         that.setData({
           openid: openid,
-          //isAdmin: that.data.adiminArr.indexOf(openid)
+          //正常情况下，应该将管理员的openid放入that.data.adminArr中
+          //为方便调试，此处提供了三种方式
+          //正常情况：
+          //isAdmin: that.data.adminArr.indexOf(openid)
+          //强制显示后台：
           isAdmin: 0
+          //强制不显示后台：
+          // isAdmin:-1
         })
         app.getInfoWhere('order_master', {
           openid: openid
