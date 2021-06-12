@@ -64,7 +64,6 @@ Page({
       const orderId = e.data["0"]._id
       app.updateInfo('order_master', orderId, {
         'paySuccess': false,
-        // 'payTime': app.CurrentTime_show()
       }, e => {
         console.log("订单状态已修改：【取消支付】" + e)
         app.clearCart()

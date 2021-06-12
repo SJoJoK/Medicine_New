@@ -15,6 +15,7 @@ Page({
       ''
     ]
   },
+
   onLoad() {
     var that = this;
     that.getOpenidAndOrders();
@@ -37,6 +38,7 @@ Page({
       }
     })
   },
+
   onPullDownRefresh: function () {
     var that = this
     that.getOpenidAndOrders()
@@ -48,7 +50,7 @@ Page({
 
   },
 
-  // 获取用户openid
+  // 获取用户openid与订单
   getOpenidAndOrders() {
     var that = this;
     wx.cloud.callFunction({
@@ -77,9 +79,8 @@ Page({
         })
       }
     })
+    console.log(that.data)
   },
-
-  
 
   goToBgInfo: function() {
     wx.navigateTo({
@@ -91,6 +92,54 @@ Page({
     wx.navigateTo({
       url: '/pages/bgManage/bgManage',
     })
-  }
+  },
+
+  toPay: function(e) {
+    const that = this
+    const id = e.currentTarget.dataset._id
+    console.log(id)
+    wx.showModal({
+      title: '支付确认',
+      content: '确定要支付吗',
+      success(res) {
+        if (res.confirm) {
+          that._pay(id)
+        } else if (res.cancel) {
+          that._notpay(id)
+        }
+      }
+    })
+  },
+
+  _notpay(id) {
+    console.log("取消支付")
+      app.updateInfo('order_master', id, {
+        'paySuccess': false
+      }, e => {
+        console.log("【取消支付】" + e)
+        app.clearCart()
+        wx.showToast({
+          title: '取消支付',
+          duration: 1000,
+        })
+      })
+  },
+
+  _pay(id) {
+    console.log("确定支付")
+    // 发送支付请求，默认成功
+      app.updateInfo('order_master', id, {
+        'paySuccess': true,
+        'payTime': app.CurrentTime_show()
+      }, e => {
+        console.log("订单状态已修改：【支付成功】" + e)
+        app.clearCart()
+        wx.showToast({
+          title: '支付成功',
+          duration: 1000,
+          success: this.getOpenidAndOrders()
+        })
+      })
+  },
 
 })

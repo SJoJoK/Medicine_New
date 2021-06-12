@@ -48,12 +48,12 @@
                 
             <view class="orders-footer" wx:if="{{!item.paySuccess}}">
                 <text>需付：￥{{item.total}}</text>
-                <view class="orders-btn" bindtap='toPay'>去付款</view>
+                <view class="orders-btn" bindtap='toPay' data-_ID="{{item._id}}">去付款</view>
             </view>
 
             <view class="orders-footer" wx:else>
                 <text>实付：￥{{item.total}}</text>
-                <view class="orders-btn" wx:if="{{item.sending && !item.finished}}" bindtap='toConfirm'>确认收货</view>
+                <view class="orders-btn" wx:if="{{item.sending && !item.finished}}" bindtap='toConfirm' data-_ID="{{item._id}}">确认收货</view>
             </view>
 
         </view>
