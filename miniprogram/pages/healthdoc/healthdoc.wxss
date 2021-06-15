@@ -9,7 +9,3 @@
 	right: 0;
 } 
 
-.chart{
-  width:100%,
-  height :300rpx,
-}

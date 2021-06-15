@@ -133,7 +133,7 @@ App({
   // --------------数据库操作----------------
 
   // 向集合内新增记录(集合名，要添加的数据对象，回调函数)
-  addRowToSet: function(setName,infoObject,callback){
+  addRowToSet:function(setName,infoObject,callback){
     const db = wx.cloud.database()
     db.collection(setName).add({
       data: infoObject,

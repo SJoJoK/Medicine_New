@@ -16,8 +16,8 @@ Page({
   onLoad: function () {
       this.echarCanve = this.selectComponent("#mychart-dom-bar-bt");
       this.initbt();
-      this.echarCanve_line = this.selectComponent("#mychart-dom-line");
-      this.initbt_line();
+    //   this.echarCanve_line = this.selectComponent("#mychart-dom-line");
+    //   this.initbt_line();
   },
   initbt:function(){
       this.echarCanve.init((canvas, width, height)=> {
@@ -26,78 +26,144 @@ Page({
         height: height
       });
       //only needs a empty set, for the openid is automatically added by the wx
-      chart.setOption(app.getInfoByOrder('cata_hinfo','catalog','asc',
-        e=>{
-            e=e.data;
-            var option = {
-            backgroundColor: '#fff',
-            title: {
-                text: '购买药品种类',
-                left: 'center',
-                textStyle: {
-                    color: '#000',
-                    fontSize: 15
-                }        
-            },
+      chart.setOption({
+        backgroundColor: '#fff',
+        title: {
+            text: '购买药品种类',
+            left: 'center',
+            textStyle: {
+                color: '#000',
+                fontSize: 15
+            }        
+        },
 
-            tooltip: {
-                trigger: 'item'
-            },
+        tooltip: {
+            trigger: 'item'
+        },
 
-            visualMap: {
-                show: false,
-                min: 80,
-                max: 600,
-                inRange: {
-                    colorLightness: [0, 1]
+        visualMap: {
+            show: false,
+            min: 80,
+            max: 600,
+            inRange: {
+                colorLightness: [0, 1]
+            }
+        },
+        series: [
+            {
+                name: '药品种类',
+                type: 'pie',
+                radius: '80%',
+                center: ['50%', '57%'],
+                data: [
+                    {value: 1, name: '头疼脑热'},
+                    {value: 2, name: '跌打损伤'},
+                    {value: 2, name: '内分泌调节'},
+                    {value: 2, name: '抗菌消炎'},
+                    {value: 2, name: '保健养生'},
+                    {value: 2, name: '特殊药品'}
+        ].sort(function (a, b) { return a.value - b.value; }),
+                roseType: 'radius',
+                label: {
+                    color: '#fff',
+                    show:true,
+                    position:'inner'
+                },
+                labelLine: {
+                    lineStyle: {
+                        color: '#fff'
+                    },
+                    smooth: 0.2,
+                    length: 10,
+                    length2: 20
+                },
+                itemStyle: {
+                    color: '#c23531',
+                    shadowBlur: 200,
+                    shadowColor: 'rgba(0, 0, 0, 0)'
+                },
+
+                animationType: 'scale',
+                animationEasing: 'elasticOut',
+                animationDelay: function (idx) {
+                    return Math.random() * 200;
                 }
-            },
-            series: [
-                {
-                    name: '药品种类',
-                    type: 'pie',
-                    radius: '100%',
-                    center: ['50%', '57%'],
-                    data: [
-                        {value: e[0].count, name: '头疼脑热'},
-                        {value: e[1].count, name: '跌打损伤'},
-                        {value: e[2].count, name: '内分泌调节'},
-                        {value: e[3].count, name: '抗菌消炎'},
-                        {value: e[4].count, name: '保健养生'},
-                        {value: e[5].count, name: '特殊药品'}
-                    ].sort(function (a, b) { return a.value - b.value; }),
-                    roseType: 'radius',
-                    label: {
-                        color: '#fff',
-                        show:true,
-                        position:'inner'
-                    },
-                    labelLine: {
-                        lineStyle: {
-                            color: '#fff'
-                        },
-                        smooth: 0.2,
-                        length: 10,
-                        length2: 20
-                    },
-                    itemStyle: {
-                        color: '#c23531',
-                        shadowBlur: 200,
-                        shadowColor: 'rgba(0, 0, 0, 0)'
-                    },
-
-                    animationType: 'scale',
-                    animationEasing: 'elasticOut',
-                    animationDelay: function (idx) {
-                        return Math.random() * 200;
-                    }
-                }
-            ]
-            }; 
-            return option;
-        }
-      ));
-      return chart;
+            }
+        ]
+    });
+    //   app.getInfoByOrder('cata_hinfo','catalog','asc',
+    //   e=>{
+    //       e=e.data;
+    //       var option={
+    //           backgroundColor: '#fff',
+    //           title: {
+    //               text: '购买药品种类',
+    //               left: 'center',
+    //               textStyle: {
+    //                   color: '#000',
+    //                   fontSize: 15
+    //               }        
+    //           },
+      
+    //           tooltip: {
+    //               trigger: 'item'
+    //           },
+      
+    //           visualMap: {
+    //               show: false,
+    //               min: 80,
+    //               max: 600,
+    //               inRange: {
+    //                   colorLightness: [0, 1]
+    //               }
+    //           },
+    //           series: [
+    //               {
+    //                   name: '药品种类',
+    //                   type: 'pie',
+    //                   radius: '80%',
+    //                   center: ['50%', '57%'],
+    //                   data: [
+    //                       {value: e[0].count, name: '头疼脑热'},
+    //                       {value: e[1].count, name: '跌打损伤'},
+    //                       {value: e[2].count, name: '内分泌调节'},
+    //                       {value: e[3].count, name: '抗菌消炎'},
+    //                       {value: e[4].count, name: '保健养生'},
+    //                       {value: e[5].count, name: '特殊药品'}
+    //           ].sort(function (a, b) { return a.value - b.value; }),
+    //                 //   roseType: 'radius',
+    //                   label: {
+    //                       color: '#fff',
+    //                       show:true,
+    //                       position:'inner'
+    //                   },
+    //                   labelLine: {
+    //                       lineStyle: {
+    //                           color: '#fff'
+    //                       },
+    //                       smooth: 0.2,
+    //                       length: 10,
+    //                       length2: 20
+    //                   },
+    //                   itemStyle: {
+    //                       color: '#c23531',
+    //                       shadowBlur: 200,
+    //                       shadowColor: 'rgba(0, 0, 0, 0)'
+    //                   },
+      
+    //                   animationType: 'scale',
+    //                   animationEasing: 'elasticOut',
+    //                   animationDelay: function (idx) {
+    //                       return Math.random() * 200;
+    //                   }
+    //               }
+    //           ]
+    //       };
+    //       console.log(option);
+    //       chart.setOption(option);
+    //       return option;
+    //   }
+    //   );
     })    
   },
 
@@ -107,7 +173,7 @@ Page({
         width: width,
         height: height
       });
-        chart.setOption(app.getInfoByOrder('time_hinfo','month','asc',
+        app.getInfoByOrder('time_hinfo','month','asc',
             e=>{
                 e=e.data;
                 var option = {
@@ -146,9 +212,10 @@ Page({
                         type: 'inside'
                     }],
                     };
+                chart.setOption(option);
                 return option;
             }
-      ));
+      );
       return chart;
     })    
   },
