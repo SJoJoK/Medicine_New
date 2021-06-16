@@ -119,8 +119,8 @@ Page({
   },
 
   buildHealthDoc: function () {
+    var month= (new Date()).getMonth()+1;
     for (let i = 0; i < 12; i++) {
-    let month= (new Date()).getMonth()+1;
       app.addRowToSet("time_hinfo", {
         count: i!=month?0:this.data.totalcnt,
         month: i+1,
@@ -242,9 +242,9 @@ Page({
       trade_no: out_trade_no
     })
     // 上传数据库
-    // app.addRowToSet('order_master', order_master, e => {
-    //   console.log("订单状态已修改：【订单生成】" + e)
-    // })
+    app.addRowToSet('order_master', order_master, e => {
+      console.log("订单状态已修改：【订单生成】" + e)
+    })
 
     wx.showModal({
       title: '支付确认',
