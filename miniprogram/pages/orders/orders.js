@@ -1,6 +1,7 @@
 const app = getApp()
 const md5 = require("../../utils/md5.js")
 
+
 Page({
   data: {
     address: {},
@@ -10,7 +11,8 @@ Page({
     myList: [],
     openid: '',
     nonce_str: '',
-    trade_no: null
+    trade_no: null,
+    totalcnt: 0
   },
 
   onReady() {
@@ -86,6 +88,8 @@ Page({
   //确认事件
   _pay() {
     console.log("确定支付")
+    //在支付完成后再做健康文档的修改
+    this.buildHealthDoc();
     const tmpOutNum = this.data.trade_no
     // 发送支付请求，默认成功
     app.getInfoWhere('order_master', {
@@ -114,6 +118,34 @@ Page({
     })
   },
 
+  buildHealthDoc: function () {
+    var month= (new Date()).getMonth()+1;
+    for (let i = 0; i < 12; i++) {
+      app.addRowToSet("time_hinfo", {
+        count: i!=month?0:this.data.totalcnt,
+        month: i+1,
+        openid: this.data.openid
+      },
+        () => {console.log("success write time info")});
+    }
+
+    var orders=this.data.orders;
+    var analysis=[[0,1],[0,2],[0,3],[0,4],[0,5],[0,6]];
+    for (let i = 0; i < orders.length; i++) {
+      var n=Math.random();
+      n=Math.floor(n*5+1);
+      analysis[n][0] += orders[i].num;
+    }
+    for (let i = 0; i < 6; i++) {
+      app.addRowToSet("cata_hinfo", {
+        count: analysis[i][0],
+        catalog: analysis[i][1],
+        openid: this.data.openid
+      },
+        () => {console.log("success write cata info")});
+    }
+  },
+
   onShow: function () {
     const self = this;
     wx.getStorage({
@@ -131,11 +163,14 @@ Page({
   getTotalPrice() {
     let orders = this.data.orders;
     let total = 0;
+    let totalcnt = 0;
     for (let i = 0; i < orders.length; i++) {
       total += orders[i].num * orders[i].price;
+      totalcnt += orders[i].num;
     }
     this.setData({
-      total: total.toFixed(2)
+      total: total.toFixed(2),
+      totalcnt: totalcnt
     })
   },
 

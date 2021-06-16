@@ -1,7 +1,7 @@
 /* miniprogram/pages/healthdoc.wxss */
 .container {
 	width:100%;
-	height:100%;
+	height:600rpx;
 	position: relative;
 	top: 0;
 	bottom: 0;
@@ -9,7 +9,3 @@
 	right: 0;
 } 
 
-.chart{
-  width:100%,
-  height :300rpx,
-}
