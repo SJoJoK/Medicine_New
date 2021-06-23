@@ -142,7 +142,7 @@ Page({
   // 添加药品信息表单
   addMedicineInfo: function(e){
     const that = this
-    if (that.data.name && that.data.price){
+    if (that.data.name && that.data.price && that.data.medicineID){
       new Promise((resolve, reject) => {
         const { medicineID, name, price, symptom, isOTC, onShow } = that.data
         const theInfo = { medicineID, name, price, symptom, isOTC,onShow }
@@ -152,7 +152,19 @@ Page({
         theInfo['class'] = that.data.theClass
         theInfo['detail'] = that.data.theDetail
         theInfo['sales'] = 0
-        resolve(theInfo)
+        app.getInfoWhere('medicine_stock', {
+          medicineID: medicineID
+        }, e => {
+          console.log(e.data)
+          if(e.data)
+          {
+            reject(theInfo)
+          }
+          else
+          {
+            resolve(theInfo)
+          }
+        })   
       }).then(theInfo => {
         // 上传所有信息
         app.addRowToSet('medicine_stock', theInfo, e => {
@@ -168,6 +180,10 @@ Page({
             })
           }
         )
+      }).catch(theInfo =>{
+        wx.showToast({
+          title: '药品编号重复!',
+        })
       })
     }
     else{
