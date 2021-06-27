@@ -129,8 +129,7 @@ Page({
     if (that.data.name && that.data.price && that.data.medicineID) {
       new Promise((resolve, reject) => {
         const { medicineID, name, price, symptom, isOTC, onShow } = that.data
-        const theInfo = { medicineID, name, price, symptom, isOTC, onShow }
-        console.log(theInfo)
+        const theInfo = { medicineID, name, price, symptom, isOTC,onShow }
         theInfo['imgArr'] = that.data.tmpUrlArr
         theInfo['imgUrl'] = that.data.tmpUrlArr[0]
         theInfo['class'] = that.data.theClass
@@ -140,14 +139,18 @@ Page({
           medicineID: medicineID
         }, e => {
           console.log(e.data)
-          if (e.data) {
-            reject(theInfo)
-          }
-          else {
+          if(e.data.length==0)
+          {
             resolve(theInfo)
+          }
+          else
+          {
+            reject(theInfo)
           }
         })
       }).then(theInfo => {
+        // 上传所有信息
+        console.log('我要上传了')
         app.addRowToSet('medicine_stock', theInfo, e => {
           console.log(e)
           wx.showToast({
@@ -161,9 +164,10 @@ Page({
             })
           }
         )
-      }).catch(theInfo => {
+      }).catch(err =>{
         wx.showToast({
-          title: '药品编号重复'
+          title: '药品编号重复!',
+          icon: 'error'
         })
       })
     }
