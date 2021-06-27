@@ -1,6 +1,3 @@
-// miniprogram/pages/homepage/homepage.js
-
-
 const app = getApp()
 
 Page({
@@ -30,10 +27,10 @@ Page({
       { id: 2, name: "价格" }
     ],
     activeOrderId: 0,
-    isShow:true, 
+    isShow: true,
     openid: '',
-    rules:{},
-    offLine:null  //是否维护
+    rules: {},
+    offLine: null
   },
 
   // 获取用户openid
@@ -42,7 +39,6 @@ Page({
     wx.cloud.callFunction({
       name: 'add',
       complete: res => {
-        // console.log('云函数获取到的openid: ', res.result.openId)
         var openid = res.result.openId;
         that.setData({
           openid: openid
@@ -51,8 +47,8 @@ Page({
     })
   },
 
-  // ------------加入购物车------------
-  addCartByHome: function(e) {
+  // 加入购物车
+  addCartByHome: function (e) {
     var self = this
     let newItem = {}
     app.getInfoWhere('medicine_stock', { _id: e.currentTarget.dataset._id },
@@ -61,86 +57,81 @@ Page({
         newCartItem.num = 1
         app.isNotRepeteToCart(newCartItem)
         wx.showToast({
-          title: '已添加至购物车',
+          title: '已添加至购物车'
         })
       }
     )
   },
 
-
-  // ------------分类展示切换---------
-  typeSwitch: function(e) {
+  // 分类展示切换
+  typeSwitch: function (e) {
     getCurrentPages()["0"].setData({
       activeTypeId: parseInt(e.currentTarget.id),
-      rules: e.currentTarget.id == 0 ? {} : { class: e.currentTarget.id}
+      rules: e.currentTarget.id == 0 ? {} : { class: e.currentTarget.id }
     })
     this.showMedicine();
   },
 
+  // 排序展示切换
   orderSwitch: function (e) {
     getCurrentPages()["0"].setData({
       activeOrderId: parseInt(e.currentTarget.id)
     })
-
-  this.showMedicine();
+    this.showMedicine();
   },
 
-  showMedicine: function()
-  {
-      if (this.data.activeOrderId == '0') {
-        app.getInfo('medicine_stock', this.data.rules, 'id', 'asc',
-          e => {
-            getCurrentPages()["0"].setData({
-              medicineInfo: e.data
-            })
-          },
-        )
-      }
-      else if (this.data.activeOrderId == '1') {
-        app.getInfo('medicine_stock', this.data.rules, 'sales', 'desc',
-          e => {
-            getCurrentPages()["0"].setData({
-              medicineInfo: e.data
-            })
-          },
-        )
-      }
-      else if (this.data.activeOrderId == '2') {
-        app.getInfo('medicine_stock', this.data.rules, 'price', 'asc',
-          e => {
-            getCurrentPages()["0"].setData({
-              medicineInfo: e.data
-            })
-          },
-        )
-      }
+  // 显示药品
+  showMedicine: function () {
+    if (this.data.activeOrderId == '0') {
+      app.getInfo('medicine_stock', this.data.rules, 'id', 'asc',
+        e => {
+          getCurrentPages()["0"].setData({
+            medicineInfo: e.data
+          })
+        },
+      )
+    }
+    else if (this.data.activeOrderId == '1') {
+      app.getInfo('medicine_stock', this.data.rules, 'sales', 'desc',
+        e => {
+          getCurrentPages()["0"].setData({
+            medicineInfo: e.data
+          })
+        },
+      )
+    }
+    else if (this.data.activeOrderId == '2') {
+      app.getInfo('medicine_stock', this.data.rules, 'price', 'asc',
+        e => {
+          getCurrentPages()["0"].setData({
+            medicineInfo: e.data
+          })
+        },
+      )
+    }
   },
 
-
-  // ---------点击跳转至详情页面-------------
-  tapToDetail: function(e) {
+  // 点击跳转至详情页面
+  tapToDetail: function (e) {
     wx.navigateTo({
-      //Dataset是currentTarget的一个项，可参考https://developers.weixin.qq.com/ebook?action=get_post_info&docid=000846df9a03909b0086a50025180a&highline=event
       url: '../detail/detail?_id=' + e.currentTarget.dataset.fid,
     })
   },
 
-
-  // ------------生命周期函数------------
+  // 生命周期函数
   onLoad: function (options) {
     var that = this
     wx.showLoading({
-      title: '加载中',
+      title: '加载中'
     })
     that.setData({
       isShow: true
     })
-    // 获取openId
     this.getOpenid();
   },
 
   onReady: function () {
-    // console.log(getCurrentPages()["0"].data)
+
   },
 
   onShow: function () {
@@ -148,7 +139,6 @@ Page({
     // 药品信息
     app.getInfoByOrder('medicine_stock', 'id', 'asc',
       e => {
-        // console.log(e.data)
         getCurrentPages()["0"].setData({
           medicineInfo: e.data,
           isShow: true,
@@ -158,7 +148,6 @@ Page({
         wx.hideLoading()
       },
     )
-    // console.log(app.globalData.offLine)
     // 是否下线
     app.getInfoWhere('setting', { "option": "offLine" },
       e => {
@@ -188,9 +177,8 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '网上药房',
-      imageUrl: '../../images/icon/medicine.jpg',
+      imageUrl: '../../images/tabBar/homepage.png',
       path: '/pages/homepage/homepage'
     }
   }
-
 })

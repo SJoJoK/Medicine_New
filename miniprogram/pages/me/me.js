@@ -1,4 +1,3 @@
-// page/component/new-pages/user/user.js
 const app = getApp();
 
 Page({
@@ -8,19 +7,12 @@ Page({
     address: {},
     isAdmin: 0,
     openid: '',
-    adminArr: [
-      //实际发布后，绑定后台管理人员的openid
-      //访问后台只需令isAdmin强制为0
-      //现在已设置为强制为0
-      //具体看getOpenidAndOrders()中的描述
-      ''
-    ]
+    adminArr: ['']
   },
 
   onLoad() {
     var that = this;
     that.getOpenidAndOrders();
-    // console.log(that.data)
   },
 
   onShow() {
@@ -42,11 +34,9 @@ Page({
     const that = this
     that.getOpenidAndOrders()
     var timer
-
-    (timer = setTimeout(function () {
+    timer = setTimeout(function () {
       wx.stopPullDownRefresh()
-    }, 500));
-
+    }, 500);
   },
 
   // 获取用户openid与订单
@@ -55,24 +45,16 @@ Page({
     wx.cloud.callFunction({
       name: 'add',
       complete: res => {
-        // console.log('云函数获取到的openid: ', res.result.openId)
         var openid = res.result.openId;
         var isAdmin = null;
         that.setData({
           openid: openid,
-          //正常情况下，应该将管理员的openid放入that.data.adminArr中
-          //为方便调试，此处提供了三种方式
-          //正常情况：
-          //isAdmin: that.data.adminArr.indexOf(openid)
           //强制显示后台：
           isAdmin: 0
-          //强制不显示后台：
-          // isAdmin:-1
         })
         app.getInfoWhere('order_master', {
           openid: openid
         }, e => {
-          // console.log(e.data)
           var tmp = []
           var len = e.data.length
           for (var i = 0; i < len; i++) {
@@ -84,7 +66,6 @@ Page({
         })
       }
     })
-    // console.log(that.data)
   },
 
   goToBgInfo: function () {
@@ -99,7 +80,6 @@ Page({
     })
   },
 
-  
   goToHealthDoc: function () {
     wx.navigateTo({
       url: '/pages/healthdoc/healthdoc',
@@ -124,26 +104,23 @@ Page({
   },
 
   _notpay(id) {
-    console.log("取消支付")
     app.updateInfo('order_master', id, {
       'paySuccess': false
     }, e => {
-      console.log("【取消支付】" + e)
+      console.log("订单状态已修改：取消支付" + e)
       wx.showToast({
         title: '取消支付',
-        duration: 1000,
+        duration: 1000
       })
     })
   },
 
   _pay(id) {
-    console.log("确定支付")
-    // 发送支付请求，默认成功
     app.updateInfo('order_master', id, {
       'paySuccess': true,
       'payTime': app.CurrentTime_show()
     }, e => {
-      console.log("订单状态已修改：【支付成功】" + e)
+      console.log("订单状态已修改：支付成功" + e)
       wx.showToast({
         title: '支付成功',
         duration: 1000,
@@ -174,7 +151,6 @@ Page({
 
   _confirm(id) {
     const db = wx.cloud.database()
-    console.log("确定收货")
     app.getInfoWhere('order_master', {
       _id: id
     }, e => {
@@ -191,7 +167,6 @@ Page({
             app.updateInfo('medicine_stock', mid, {
               sales: db.command.inc(delta)
             }, e => {
-              console.log(e)
               console.log("销量已增加" + e)
             })
           })
@@ -201,7 +176,7 @@ Page({
         finished: true,
         finishedTime: app.CurrentTime_show()
       }, e => {
-        console.log("订单状态已修改：【已确认收货】" + e)
+        console.log("订单状态已修改：确认收货" + e)
         wx.showToast({
           title: '确认收货',
           duration: 1000,
@@ -227,15 +202,14 @@ Page({
   },
 
   _cancel(id) {
-    console.log("取消订单")
     app.deleteInfoFromSet('order_master', id, e => {
-      console.log("订单状态已修改：【已取消订单】" + e)
+      console.log("订单状态已修改：取消订单" + e)
       wx.showToast({
         title: '取消订单',
         duration: 1000,
         success: this.getOpenidAndOrders()
       })
     })
-  },
+  }
 })
 

@@ -58,50 +58,20 @@
       "list": [
         {
           "id": -1,
-          "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide",
-          "query": ""
-        },
-        {
-          "id": 1,
-          "name": "后台添加",
-          "pathName": "pages/bgInfo/bgInfo",
+          "name": "homepage",
+          "pathName": "pages/homepage/homepage",
           "query": ""
         },
         {
           "id": -1,
-          "name": "pay",
-          "pathName": "pages/pay/pay",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "后台",
-          "pathName": "pages/bgInfo/bgInfo",
+          "name": "cart",
+          "pathName": "pages/cart/cart",
           "query": ""
         },
         {
           "id": -1,
           "name": "me",
           "pathName": "pages/me/me",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "address",
-          "pathName": "pages/address/address",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "order",
-          "pathName": "pages/orders/orders",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "订单管理",
-          "pathName": "pages/bgManage/bgManage",
           "query": ""
         }
       ]

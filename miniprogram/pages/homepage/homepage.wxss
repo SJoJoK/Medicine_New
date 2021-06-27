@@ -1,15 +1,16 @@
-page {background-color: rgb(255,255,255)}
+page {
+  background-color: rgb(255, 255, 255);
+}
 
 /* 轮播图 */
-
 
 .swiperContainer {
   width: 750prx;
   height: 500rpx;
-  }
-.fruit-board {margin-top: 10rpx}
+}
 
 /* 分类选项卡 */
+
 .type-container {
   width: 100%;
   height: 100rpx;
@@ -19,7 +20,7 @@ page {background-color: rgb(255,255,255)}
   white-space: nowrap;
 }
 
-.type-item{
+.type-item {
   height: 100rpx;
   margin: 23rpx;
   padding-left: 10rpx;
@@ -28,7 +29,7 @@ page {background-color: rgb(255,255,255)}
   text-align: center;
 }
 
-.type-item view{
+.type-item view {
   line-height: 60rpx;
   font-size: 33rpx;
   text-align: center;
@@ -40,16 +41,17 @@ page {background-color: rgb(255,255,255)}
   border-bottom: 5rpx solid rgb(0, 0, 0);
 }
 
-/* 排序 */
+/* 排序选项卡 */
+
 .order-container {
   position: relative;
   display: flex;
   white-space: nowrap;
 }
 
-.order-item{
+.order-item {
   height: 30rpx;
-  width:80rpx;
+  width: 80rpx;
   margin-left: 14rpx;
   margin-bottom: 20rpx;
   margin-top: 10rpx;
@@ -59,7 +61,7 @@ page {background-color: rgb(255,255,255)}
   text-align: center;
 }
 
-.order-item view{
+.order-item view {
   line-height: 40rpx;
   font-size: 22rpx;
   text-align: center;
@@ -71,6 +73,7 @@ page {background-color: rgb(255,255,255)}
 }
 
 /* 商品图 */
+
 .medicine-container {
   display: flex;
   flex-direction: row;
@@ -86,60 +89,71 @@ page {background-color: rgb(255,255,255)}
   border-radius: 15rpx;
   margin-top: 20rpx;
   margin-bottom: 20rpx;
-  margin-left:14rpx;
-  margin-right:14rpx;
+  margin-left: 14rpx;
+  margin-right: 14rpx;
   background-color: white;
 }
 
-.medicine-item .medicine-image {
+.medicine-image {
   height: 320rpx;
   width: 345rpx;
 }
 
-.medicine-item .medicine-image image {
+.medicine-image image {
   height: 100%;
   width: 100%;
   border-top-left-radius: 15rpx;
   border-top-right-radius: 15rpx;
 }
 
-.medicine-item .medicine-info {
+.medicine-info {
   margin: 15rpx 0 10rpx 10rpx;
 }
 
-.medicine-item .medicine-info .name {
-  display:block;
-  font-size:30rpx;
+.medicine-name {
+  display: block;
+  font-size: 30rpx;
   margin-left: 6rpx;
 }
 
-.medicine-item .medicine-info .line2 {
+.line2 {
   display: flex;
   margin-top: 5rpx;
   justify-content: space-between;
   padding-right: 20rpx;
-  align-items: center
+  align-items: center;
 }
 
-.medicine-item .medicine-info .line2 image {
+.line2 image {
   width: 50rpx;
   height: 50rpx;
   position: relative;
   top: -8rpx;
-  left: 12rpx
+  left: 12rpx;
 }
 
-.medicine-item .medicine-info .price {
+.medicine_price {
   width: 200rpx;
-  font-size:30rpx;color:rgb(219, 168, 113);
+  font-size: 30rpx;
+  color: rgb(219, 168, 113);
 }
 
-.medicine-item .medicine-info .price .unit {
-  font-size:20rpx;
-  color:rgb(171, 171, 171);
+.medicine_sales {
+  font-size: 20rpx;
+  color: rgb(171, 171, 171);
 }
 
 /* 主页底部 */
-.homeBottom {padding-top:15rpx;padding-bottom: 25rpx;display: flex;justify-content: center;align-items: center}
-.homeBottom .bottomWord {font-size: 25rpx;color: rgb(202, 201, 201)}
 
+.homeBottom {
+  padding-top: 15rpx;
+  padding-bottom: 25rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottomWord {
+  font-size: 25rpx;
+  color: rgb(202, 201, 201);
+}

@@ -10,9 +10,6 @@ export default class WxCanvas {
     else {
       this._initStyle(ctx);
     }
-
-    // this._initCanvas(zrender, ctx);
-
     this._initEvent();
   }
 
@@ -22,23 +19,16 @@ export default class WxCanvas {
     }
   }
 
-  // canvasToTempFilePath(opt) {
-  //   if (!opt.canvasId) {
-  //     opt.canvasId = this.canvasId;
-  //   }
-  //   return wx.canvasToTempFilePath(opt, this);
-  // }
-
   setChart(chart) {
     this.chart = chart;
   }
 
   attachEvent() {
-    // noop
+
   }
 
   detachEvent() {
-    // noop
+
   }
 
   _initCanvas(zrender, ctx) {
@@ -56,19 +46,15 @@ export default class WxCanvas {
     var styles = ['fillStyle', 'strokeStyle', 'globalAlpha',
       'textAlign', 'textBaseAlign', 'shadow', 'lineWidth',
       'lineCap', 'lineJoin', 'lineDash', 'miterLimit', 'fontSize'];
-
     styles.forEach(style => {
       Object.defineProperty(ctx, style, {
         set: value => {
-          if (style !== 'fillStyle' && style !== 'strokeStyle'
-            || value !== 'none' && value !== null
-          ) {
+          if (style !== 'fillStyle' && style !== 'strokeStyle' || value !== 'none' && value !== null) {
             ctx['set' + style.charAt(0).toUpperCase() + style.slice(1)](value);
           }
         }
       });
     });
-
     ctx.createRadialGradient = () => {
       return ctx.createCircularGradient(arguments);
     };
@@ -89,7 +75,6 @@ export default class WxCanvas {
       wxName: 'touchEnd',
       ecName: 'click'
     }];
-
     eventNames.forEach(name => {
       this.event[name.wxName] = e => {
         const touch = e.touches[0];
@@ -104,6 +89,7 @@ export default class WxCanvas {
   set width(w) {
     if (this.canvasNode) this.canvasNode.width = w
   }
+
   set height(h) {
     if (this.canvasNode) this.canvasNode.height = h
   }
@@ -113,6 +99,7 @@ export default class WxCanvas {
       return this.canvasNode.width
     return 0
   }
+
   get height() {
     if (this.canvasNode)
       return this.canvasNode.height

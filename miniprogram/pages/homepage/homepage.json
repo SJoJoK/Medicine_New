@@ -1,8 +1,9 @@
 {
   "navigationBarTitleText": "网上药房",
+  "enablePullDownRefresh": true,
   "usingComponents": {
-    "mySearch":"/components/search/search",
+    "mySearch": "/components/search/search",
     "swiper": "/components/swiper/swiper"
   },
-  "enable-flex":true
+  "enable-flex": true
 }

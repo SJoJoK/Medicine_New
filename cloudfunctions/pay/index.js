@@ -5,8 +5,7 @@ const request = require('request')
 cloud.init()
 
 // 云函数入口函数
-// 获取prepay_id
-exports.main = async (event, context) => {  
+exports.main = async (event, context) => {
   let result = await getPrepayIdPromise(event);
   return result
 }

@@ -1,34 +1,30 @@
-/* miniprogram/pages/cart.wxss */
-
-page{
-  background-color: #ffffff;
+page {
+  background-color: #fff;
   font-size: 32rpx;
 }
 
-.navigator-hover{
-  background: none;
-}
-
-.cart-box{
+.cart-box {
   padding-bottom: 100rpx;
   color: grey;
   font-size: 22rpx;
 }
-.cart-list{
+
+.cart-list {
   position: relative;
   padding: 20rpx 20rpx 20rpx 285rpx;
   height: 185rpx;
   border-bottom: 1rpx solid #e9e9e9;
 }
 
-.cart-list .cart-thumb{
+.cart-thumb {
   position: absolute;
   top: 20rpx;
   left: 45rpx;
   width: 185rpx;
   height: 185rpx;
 }
-.cart-list .cart-pro-name{
+
+.cart-pro-name {
   padding-top: 15rpx;
   font-size: 35rpx;
   color: black;
@@ -37,23 +33,26 @@ page{
   line-height: 50rpx;
   overflow: hidden;
 }
-.cart-list .cart-pro-price{
-  padding: 15rpx;  
+
+.cart-pro-price {
+  padding: 15rpx;
   font-size: 35rpx;
-  color: rgb(219, 168, 113);  
+  color: rgb(219, 168, 113);
   display: inline-block;
   float: right;
   height: 105rpx;
   line-height: 50rpx;
 }
-.cart-list .cart-count-box{
+
+.cart-count-box {
   position: absolute;
   left: 255rpx;
   bottom: 20rpx;
   margin-left: 5rpx;
   height: 80rpx;
 }
-.cart-list .cart-count-box text{
+
+.cart-count-box text {
   line-height: 80rpx;
   text-align: center;
   padding-top: 10rpx;
@@ -62,16 +61,18 @@ page{
   padding-right: 15rpx;
 }
 
-.cart-count-down,.cart-count-add{
+.cart-count-down, .cart-count-add {
   font-size: 44rpx;
   height: 100%;
 }
-.cart-count-num{
+
+.cart-count-num {
   font-size: 30rpx;
   border: rgb(143, 143, 143) 1.5rpx solid;
   border-radius: 10%;
 }
-.cart-del{
+
+.cart-del {
   position: absolute;
   right: 20rpx;
   bottom: 20rpx;
@@ -81,7 +82,8 @@ page{
   text-align: center;
   font-size: 44rpx;
 }
-.cart-footer{
+
+.cart-footer {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -93,16 +95,19 @@ page{
   border-top: 3rpx solid #ededed;
   color: rgb(143, 143, 143);
 }
-.cart-footer icon{
-  padding:25rpx 0 0 20rpx;
+
+.cart-footer icon {
+  padding: 25rpx 0 0 20rpx;
 }
-.cart-footer .cart-toatl-price {
+
+.cart-toatl-price {
   flex: 1;
   text-align: left;
   padding-left: 30rpx;
   font-size: 35rpx;
 }
-.cart-footer .order-icon {
+
+.order-icon {
   color: white;
   width: 150rpx;
   background-color: black;
@@ -115,6 +120,7 @@ page{
 }
 
 /* 空购物车 */
+
 .cart-no-data {
   text-align: center;
   color: rgb(142, 142, 142);
