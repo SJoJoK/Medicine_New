@@ -1,11 +1,10 @@
-/* components/search/search.wxss */
-
 /* 搜索框 */
-.search-view{
-  left:0;
-  right:0;
-  top:0;
-  z-index:500;
+
+.search-view {
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 500;
   width: 100%;
   position: relative;
   height: 100rpx;
@@ -13,50 +12,53 @@
   display: flex;
   flex-direction: column;
 }
-.search-content{
-   background: rgba(255, 255, 255, 0.959);
-   width:650rpx;
-   display: flex;
-   flex-direction: row;
-   align-items: center;
-   padding-top: auto;
-   padding-left: 20rpx;
-   padding-bottom: auto;
-   margin: auto;
-   height: 70rpx;
-   border-radius:8px 8px;
-   border-width: 4rpx 4rpx 4rpx 4rpx;
+
+.search-content {
+  background: rgba(255, 255, 255, 0.959);
+  width: 650rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: auto;
+  padding-left: 20rpx;
+  padding-bottom: auto;
+  margin: auto;
+  height: 70rpx;
+  border-radius: 8px 8px;
+  border-width: 4rpx 4rpx 4rpx 4rpx;
   border-color: black;
   border-style: solid;
 }
-.search-icon{
+
+.search-icon {
   width: 40rpx;
   height: 33rpx;
   margin-right: 20rpx;
 }
-.search-input{
+
+.search-input {
   width: 500rpx;
   font-size: 29rpx;
   letter-spacing: 3rpx;
 }
 
-.close-icon{
+.close-icon {
   width: 60rpx;
   height: 50rpx;
   margin-right: 10rpx;
 }
 
-.search-btn{
+.search-btn {
   width: 150rpx;
   height: 70rpx;
   margin-right: 0rpx;
-  background-color:rgb(0, 0, 0);
+  background-color: rgb(0, 0, 0);
   font-size: 28rpx;
   align-items: center;
   border-top-left-radius: 0rpx;
   border-bottom-left-radius: 0rpx;
-  color:#fff;
-  border:none;
+  color: #fff;
+  border: none;
   letter-spacing: 5rpx;
   position: relative;
 }

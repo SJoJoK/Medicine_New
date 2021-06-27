@@ -1,10 +1,8 @@
-<!--components/search/search.wxml-->
 <view class="search-view">
   <view class="search-content">
-    <image src="/images/icon/search3.png" class="search-icon" />
-    <input placeholder="请输入搜索内容" class="search-input" maxlength="30" confirm-type="搜索" bindinput='listenerSearchInput' value="{{inputValue}}">
-    </input>
-    <image src="/images/icon/close2.png" class="close-icon" bindtap="btnCancel"/>
+    <image src="/images/icon/search.png" class="search-icon" />
+    <input placeholder="请输入搜索内容" class="search-input" maxlength="30" confirm-type="搜索" bindinput='listenerSearchInput' value="{{inputValue}}" />
+    <image src="/images/icon/close.png" class="close-icon" bindtap="btnCancel" />
     <button class='search-btn' bindtap="toSearch">搜索</button>
   </view>
 </view>

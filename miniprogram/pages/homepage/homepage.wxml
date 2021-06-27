@@ -1,18 +1,19 @@
-<!-- 维护 -->
-<view style='height:100%;width:750rpx;background:white;line-height:1200rpx;text-align:center' wx:if="{{offLine}}">
-    打烊啦~~~~~
+<!-- 关店 -->
+<view style='height:100%; width:750rpx; background:white; line-height:1200rpx; text-align:center' wx:if="{{offLine}}">
+    当前尚未开店
 </view>
 
+<!-- 开店 -->
 <view class='myHomePage' wx:if="{{isShow && !offLine}}">
     <!-- 搜索框 -->
     <mySearch></mySearch>
 
     <!-- 轮播图 -->
-    <view style='height:500rpx;width:100%'>
+    <view style='height:500rpx; width:100%'>
         <swiper></swiper>
     </view>
 
-    <!-- 分类展示 -->
+    <!-- 分类 -->
     <scroll-view scroll-x scroll-with-animation class='type-container'>
         <view class='type-item' wx:for="{{typeCat}}" wx:key="id">
             <view id='{{item.id}}' class="type-name {{activeTypeId === item.id ? 'type-item-on' : ''}}" bindtap='typeSwitch'>
@@ -30,8 +31,7 @@
         </view> 
     </view>
 
-    <!-- 商品图 -->
-
+    <!-- 药品 -->
     <view class='medicine-container'>
         <!-- 药品信息卡片 -->
         <block wx:for="{{medicineInfo}}" wx:key='medicineID'>
@@ -44,15 +44,15 @@
                 <view class='medicine-info'>
                     <view class='line1'>
                         <!-- 名称 -->
-                        <text class='name'>{{item.name}}</text>
+                        <text class='medicine-name'>{{item.name}}</text>
                     </view>
                     <view class='line2'>
-                        <!-- 价格 -->
-                        <view class='price'>
+                        <!-- 价格和销量 -->
+                        <view class='medicine_price'>
                             <text>￥{{item.price}}</text>
-                            <text class='unit'> / 销量{{item.sales}}</text>
+                            <text class='medicine_sales'> / 销量{{item.sales}}</text>
                         </view>
-                        <!-- 购物车 -->
+                        <!-- 加入购物车 -->
                         <image src='../../images/icon/add.png' mode='aspectFit' catchtap="addCartByHome" data-_id="{{item._id}}"></image>
                     </view>
                 </view>

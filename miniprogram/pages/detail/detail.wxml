@@ -1,12 +1,10 @@
-<!--miniprogram/pages/detail/detail.wxml-->
 <view class='detail-container'>
-
-<!-- 显示详情图片数组 -->
+  <!-- 显示详情图片 -->
   <view class='swiperContainer'>
     <swiper class="detail-image" autoplay="true" interval="5000" circular="true">
       <block wx:for="{{medicineDetail.imgArr}}" wx:key="id">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" width="750rpx" height="500rpx" mode='aspectFill'/>
+          <image src="{{item}}" class="slide-image" width="750rpx" height="500rpx" mode='aspectFill' />
         </swiper-item>
       </block>
     </swiper>
@@ -14,42 +12,41 @@
 
   <!-- 详细信息 -->
   <view class='detail-info'>
-    <!-- 第一行 -->
     <view class='line1'>
       <!-- 名字 -->
       <view>{{medicineDetail.name}}</view>
     </view>
-    <!-- 第二行 -->
     <view class='line2'>
+      <!-- 价格和销量 -->
       <view class='price'>价格：￥{{medicineDetail.price}}</view>
-      <view class='purchaseFreq'>销量：{{medicineDetail.sales}}</view>
+      <view class='sales'>销量：{{medicineDetail.sales}}</view>
     </view>
   </view>
 
+  <!-- 其他信息 -->
   <view class='other-info'>
-  <view wx:if="{{medicineDetail.isOTC}}">非处方药</view>
-  <view wx:else>处方药</view>
-  <view>适用症状：{{medicineDetail.symptom}}</view>
-  <view>详情：{{medicineDetail.detail}}</view>
+    <view wx:if="{{medicineDetail.isOTC}}">非处方药</view>
+    <view wx:else>处方药</view>
+    <view>适用症状：{{medicineDetail.symptom}}</view>
+    <view>详情：{{medicineDetail.detail}}</view>
   </view>
 
   <!-- 底部导航 -->
   <view class='detail-nav'>
-    <!-- 购物车 -->
     <view class='cart' bindtap='goToCart'>
-      <image src="../../images/icon/cart5.png" mode='scaleToFill'></image>
+      <image src="../../images/icon/cart.png" mode='scaleToFill'></image>
       <view>购物车</view>
     </view>
     <view class='addToCart' bindtap='addToCart'>加入购物车</view>
   </view>
 
-  <!-- 购物车/购买弹窗 -->
+  <!-- 购买弹窗 -->
   <view class='popUpWindow' hidden="{{popUpHidden}}">
     <view class='popUpMask'>
       <view class='popCard'>
         <!-- 取消按钮 -->
         <view style='width:700rpx;' bindtap='popCancel'>
-          <icon type="cancel" size="20" color='black' style='float:right'/>
+          <icon type="cancel" size="20" color='black' style='float:right' />
         </view>
         <!-- 名字 -->
         <view class='popName'>{{medicineDetail.name}}</view>
@@ -64,7 +61,7 @@
             <view class='plus' bindtap='plusCount'>+</view>
           </view>
         </view>
-        <!-- 按钮 -->
+        <!-- 确定按钮 -->
         <view class='popButton' bindtap='toCart'>确定</view>
       </view>
     </view>

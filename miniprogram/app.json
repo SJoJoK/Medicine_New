@@ -2,15 +2,14 @@
   "cloud": true,
   "pages": [
     "pages/homepage/homepage",
-    "pages/bgManage/bgManage",
-    "pages/bgInfo/bgInfo",
     "pages/cart/cart",
     "pages/me/me",
     "pages/detail/detail",
+    "pages/bgInfo/bgInfo",
+    "pages/bgManage/bgManage",
     "pages/address/address",
     "pages/orders/orders",
     "pages/healthdoc/healthdoc"
-
   ],
   "window": {
     "backgroundColor": "#FFFFFF",
@@ -27,20 +26,20 @@
       {
         "pagePath": "pages/homepage/homepage",
         "text": "药品",
-        "iconPath": "images/tabBar/homepage4.png",
-        "selectedIconPath": "images/tabBar/homepage-sel2.png"
+        "iconPath": "images/tabBar/homepage.png",
+        "selectedIconPath": "images/tabBar/homepage-sel.png"
       },
       {
         "pagePath": "pages/cart/cart",
         "text": "购物车",
-        "iconPath": "images/tabBar/cart4.png",
-        "selectedIconPath": "images/tabBar/cart-sel2.png"
+        "iconPath": "images/tabBar/cart.png",
+        "selectedIconPath": "images/tabBar/cart-sel.png"
       },
       {
         "pagePath": "pages/me/me",
         "text": "我的",
-        "iconPath": "images/tabBar/me4.png",
-        "selectedIconPath": "images/tabBar/me-sel2.png"
+        "iconPath": "images/tabBar/me.png",
+        "selectedIconPath": "images/tabBar/me-sel.png"
       }
     ]
   },
